@@ -8,6 +8,7 @@ public class SisInternoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SisInternoApplication.class, args);
+		System.out.println("holavvvvs");
 	}
 
 }
