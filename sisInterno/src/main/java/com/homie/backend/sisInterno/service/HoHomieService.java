@@ -1,6 +1,5 @@
 package com.homie.backend.sisInterno.service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +23,11 @@ public class HoHomieService {
 		if (hoHomieRepository.findByHoCedula(hoHomie.getHoCedula()) != null) {
 			return null;
 		}
+		return hoHomieRepository.save(hoHomie);
+	}
+	
+	
+	public HoHomie editarHomie(HoHomie hoHomie) {
 		return hoHomieRepository.save(hoHomie);
 	}
 	

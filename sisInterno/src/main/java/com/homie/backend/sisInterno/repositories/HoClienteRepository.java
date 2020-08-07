@@ -2,11 +2,13 @@ package com.homie.backend.sisInterno.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 
+import com.homie.backend.sisInterno.entity.HoCliente;
+import com.homie.backend.sisInterno.entity.HoHomie;
 
-import com.homie.backend.sisInterno.entity.HoComentario;
 
-
-public interface HoClienteRepository extends CrudRepository<HoComentario, String>{
+public interface HoClienteRepository extends CrudRepository<HoCliente, String>{
+	
+	HoHomie findByClCedulaRuc(String ClCedulaRuc);
 
 
 }
