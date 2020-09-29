@@ -43,6 +43,9 @@ public class HoPedido {
 	@OneToMany(mappedBy="hoPedido", cascade=CascadeType.ALL)
 	private List<HoComentario> hoComentarioList;
 	
+	@OneToMany(mappedBy="hoPedido", cascade=CascadeType.ALL)
+	private List<HoPedidoServicio> hoPedidoServicioList;
+	
 	@ManyToOne
 	@JoinColumn(name="ho_cliente" ) 
 	private HoCliente hoCliente;
