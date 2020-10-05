@@ -42,6 +42,13 @@ public class HoHomieController {
 		return new ResponseEntity<List<HoHomie>>(lista, HttpStatus.OK);
 	}
 	
+	@GetMapping
+	@RequestMapping("/HoHomieDisponible")
+	public ResponseEntity<List<HoHomie>> listarDisponible() {
+		List<HoHomie> lista = hoHomieService.listarHomies();
+		return new ResponseEntity<List<HoHomie>>(lista, HttpStatus.OK);
+	}
+	
 	@PutMapping
 	public ResponseEntity<HoHomie> editar(@RequestBody HoHomie entidad) {
 		HoHomie updatedHomie = hoHomieService.editarHomie(entidad);
