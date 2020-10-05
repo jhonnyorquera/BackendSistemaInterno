@@ -19,12 +19,14 @@ public class HoCatalogoService {
 	
 	
 	public HoCatalogo registrarCatalogo(HoCatalogo hoCatalogo) {
+		hoCatalogo.setSeNombre(hoCatalogo.getSeNombre().toUpperCase());
 		return hoCatalogoRepository.save(hoCatalogo);
 	}
 	
 	
-	public HoCatalogo editarCatalogo(HoCatalogo hoCliente) {
-		return hoCatalogoRepository.save(hoCliente);
+	public HoCatalogo editarCatalogo(HoCatalogo hoCatalogo) {
+		hoCatalogo.setSeNombre(hoCatalogo.getSeNombre().toUpperCase());
+		return hoCatalogoRepository.save(hoCatalogo);
 	}
 	
 	

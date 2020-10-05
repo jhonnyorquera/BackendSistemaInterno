@@ -27,6 +27,7 @@ public class HoCatalogoController {
 
 	@PostMapping
 	public ResponseEntity<HoCatalogo> guardar(@RequestBody HoCatalogo entidad) {
+	
 		HoCatalogo newServicio = hoCatalogoService.registrarCatalogo(entidad);
 		return ResponseEntity.status(HttpStatus.CREATED).body(newServicio);
 	}
