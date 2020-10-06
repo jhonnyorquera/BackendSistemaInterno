@@ -3,11 +3,17 @@ package com.homie.backend.sisInterno.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class HoPedidoHomie {
@@ -19,10 +25,13 @@ public class HoPedidoHomie {
 	@Column(scale = 2)
 	private Double hoPeHoCalificacion;
 	
-	@ManyToOne
-	@JoinColumn(name="ho_homie" ) 
+	
+	@ManyToOne( fetch=FetchType.LAZY )
+	@JoinColumn(name="ho_homie")
+	@JsonIgnore
 	private HoHomie hoHomie;
 		
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="ho_pedido" ) 
 	private HoPedido hoPedido;
