@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.homie.backend.sisInterno.dto.HomieDisponibleDto;
 import com.homie.backend.sisInterno.entity.HoHomie;
 import com.homie.backend.sisInterno.service.HoHomieService;
 
@@ -44,9 +45,9 @@ public class HoHomieController {
 	
 	@GetMapping
 	@RequestMapping("/HoHomieDisponible")
-	public ResponseEntity<List<HoHomie>> listarDisponible() {
-		List<HoHomie> lista = hoHomieService.listarHomies();
-		return new ResponseEntity<List<HoHomie>>(lista, HttpStatus.OK);
+	public ResponseEntity<List<HomieDisponibleDto>> listarDisponible() {
+		List<HomieDisponibleDto> lista = hoHomieService.listarHomiesDisponibles();
+		return new ResponseEntity<List<HomieDisponibleDto>>(lista, HttpStatus.OK);
 	}
 	
 	@PutMapping
