@@ -1,6 +1,6 @@
 package com.homie.backend.sisInterno.entity;
 
-import java.util.Date;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,6 +1,6 @@
 package com.homie.backend.sisInterno.service;
 
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -18,14 +18,8 @@ public class HoPedidoHomieService {
 	}
 	
 	
-
-	
-
-	
-	
-	public List<HoPedidoHomie> listarPedidos() {
-		
-		return (List<HoPedidoHomie>) hoPedidoHomieRepository.findAll();
+	public List<HoPedidoHomie> listarPedidos(HashMap<String, Object> data) {
+				return (List<HoPedidoHomie>) hoPedidoHomieRepository.getData(data);
 		
 	}
 	
