@@ -1,22 +1,20 @@
 package com.homie.backend.sisInterno.service;
 
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 
-import com.homie.backend.sisInterno.dto.HomieDisponibleDto;
+
 import com.homie.backend.sisInterno.entity.HoHomie;
-import com.homie.backend.sisInterno.entity.HoPedidoHomie;
 import com.homie.backend.sisInterno.repositories.HoHomieRepository;
 
 @Service
 public class HoHomieService {
 	private HoHomieRepository hoHomieRepository;
 
-	private HoPedidoHomieService hoPedidoHomieService;
 	
 	public HoHomieService(HoHomieRepository hoHomieRepository) {
 		this.hoHomieRepository = hoHomieRepository;
@@ -41,18 +39,6 @@ public class HoHomieService {
 		return (List<HoHomie>) hoHomieRepository.findAll();	
 	}
 	
-	public List<HomieDisponibleDto> listarHomiesDisponibles() {
-		
-		//consulta pedidos en la fecha
-	
-		List <HoPedidoHomie> pedidosHomie=new ArrayList<>();
-	
-		
-		
-		
-		List <HomieDisponibleDto> homiesDisponibles= new  ArrayList<>();
-			
-		return homiesDisponibles;
-	}
+
 	
 }

@@ -50,8 +50,23 @@ public class HoPedido {
 	private List<HoPedidoServicio> hoPedidoServicioList;
 	
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="ho_cliente" ) 
 	private HoCliente hoCliente;
+	
+	
+
+	
+
+	public HoPedido(String peCodigo, Date peFechaPedido, Long peCantidadHoras, String peEstado) {
+		super();
+		this.peCodigo = peCodigo;
+		this.peFechaPedido = peFechaPedido;
+		this.peCantidadHoras = peCantidadHoras;
+		this.peEstado = peEstado;
+	}
+
+
 
 	public String getPeCodigo() {
 		return peCodigo;
