@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class HoCliente {
 	
@@ -44,6 +46,7 @@ public class HoCliente {
 	@Column(length = 100)
 	private String obFactura;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="hoCliente", cascade=CascadeType.ALL)
 	private List<HoPedido> hoPedidoList;
 	
