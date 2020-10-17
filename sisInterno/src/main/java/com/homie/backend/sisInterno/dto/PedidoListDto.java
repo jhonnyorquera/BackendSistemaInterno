@@ -10,6 +10,11 @@ import java.util.Date;
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class PedidoListDto {
 	
+	
+	private String plHoCedula;
+	private String plHoNombre;
+	private String plHoModalidad;
+	private String plHoTelefono;
 	private Date plFechaPedido;
 	private Long plCantidadHoras;
 	private String plNombreCliente;
@@ -21,13 +26,34 @@ public class PedidoListDto {
 		super();
 	}
 
-	public PedidoListDto(Date plFechaPedido, Long plCantidadHoras, String plNombreCliente, String plEstado) {
+	
+
+	public PedidoListDto(String plHoCedula, String plHoNombre, String plHoModalidad, String plHoTelefono, Date plFechaPedido,
+			Long plCantidadHoras, String plNombreCliente, String plEstado) {
 		super();
+		this.plHoCedula=plHoCedula;
+		this.plHoNombre = plHoNombre;
+		this.plHoModalidad = plHoModalidad;
+		this.plHoTelefono = plHoTelefono;
 		this.plFechaPedido = plFechaPedido;
 		this.plCantidadHoras = plCantidadHoras;
 		this.plNombreCliente = plNombreCliente;
 		this.plEstado = plEstado;
 	}
+
+
+
+	public String getPlHoCedula() {
+		return plHoCedula;
+	}
+
+
+
+	public void setPlHoCedula(String plHoCedula) {
+		this.plHoCedula = plHoCedula;
+	}
+
+
 
 	public Date getPlFechaPedido() {
 		return plFechaPedido;
@@ -60,6 +86,43 @@ public class PedidoListDto {
 	public void setPlEstado(String plEstado) {
 		this.plEstado = plEstado;
 	}
+
+
+
+	public String getPlHoNombre() {
+		return plHoNombre;
+	}
+
+
+
+	public void setPlHoNombre(String plHoNombre) {
+		this.plHoNombre = plHoNombre;
+	}
+
+
+
+	public String getPlHoModalidad() {
+		return plHoModalidad;
+	}
+
+
+
+	public void setPlHoModalidad(String plHoModalidad) {
+		this.plHoModalidad = plHoModalidad;
+	}
+
+
+
+	public String getPlHoTelefono() {
+		return plHoTelefono;
+	}
+
+
+
+	public void setPlHoTelefono(String plHoTelefono) {
+		this.plHoTelefono = plHoTelefono;
+	}
+	
 	
 	
 	
