@@ -40,6 +40,18 @@ public class PedidoListDto {
 		this.plNombreCliente = plNombreCliente;
 		this.plEstado = plEstado;
 	}
+	
+	
+
+
+
+	public PedidoListDto(String plHoCedula, String plHoNombre, String plHoModalidad, String plHoTelefono) {
+		super();
+		this.plHoCedula = plHoCedula;
+		this.plHoNombre = plHoNombre;
+		this.plHoModalidad = plHoModalidad;
+		this.plHoTelefono = plHoTelefono;
+	}
 
 
 
