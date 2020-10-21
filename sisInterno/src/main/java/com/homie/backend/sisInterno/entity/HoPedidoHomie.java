@@ -32,6 +32,14 @@ public class HoPedidoHomie {
 	@ManyToOne
 	@JoinColumn(name="ho_pedido" ) 
 	private HoPedido hoPedido;
+	
+	
+
+	public HoPedidoHomie(HoHomie hoHomie, HoPedido hoPedido) {
+		super();
+		this.hoHomie = hoHomie;
+		this.hoPedido = hoPedido;
+	}
 
 	public Integer getHoPeHoId() {
 		return hoPeHoId;

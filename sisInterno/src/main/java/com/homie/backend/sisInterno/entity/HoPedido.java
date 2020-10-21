@@ -53,9 +53,25 @@ public class HoPedido {
 	@JoinColumn(name="ho_cliente" ) 
 	private HoCliente hoCliente;
 	
+	@Temporal(TemporalType.DATE)
+	private Date peFechaCreacion;
+	
+	
 	
 
 	
+
+	public Date getPeFechaCreacion() {
+		return peFechaCreacion;
+	}
+
+
+
+	public void setPeFechaCreacion(Date peFechaCreacion) {
+		this.peFechaCreacion = peFechaCreacion;
+	}
+
+
 
 	public HoPedido() {
 		super();

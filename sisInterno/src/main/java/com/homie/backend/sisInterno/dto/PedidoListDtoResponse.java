@@ -20,6 +20,9 @@ public class PedidoListDtoResponse {
 		this.hlHoModalidad = hlHoModalidad;
 		this.hlHoTelefono = hlHoTelefono;
 	}
+	public PedidoListDtoResponse() {
+		// TODO Auto-generated constructor stub
+	}
 	public String gethHoCedula() {
 		return hHoCedula;
 	}

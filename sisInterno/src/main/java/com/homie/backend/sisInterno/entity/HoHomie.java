@@ -12,65 +12,63 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 @Entity
 public class HoHomie {
 
-	
 	@Id
 	private String hoCedula;
-	
+
 	@Column(length = 50)
 	private String hoNombre;
 
 	@Column(length = 30)
 	private String hoTelefono;
-	
+
 	@Column(length = 30)
 	private String hoCorreo;
-	
+
 	@Column(length = 150)
 	private String hoNroCuenta;
-	
+
 	@Column(length = 30)
 	private String hoModalidad;
-	
+
 	@Column(length = 30)
 	private String hoSector;
-	
+
 	@Column(length = 50)
 	private String hoNivelEducativo;
-	
+
 	@Column(length = 50)
 	private String hoDireccion;
-	
+
 	@Column(length = 20)
 	private String hoSueldo;
-	
+
 	@Column(length = 50)
 	private String hoEstadoCivil;
-	
+
 	@Column(length = 100)
 	private String hoHijos;
 
 	@Temporal(TemporalType.DATE)
 	private Date hoFechaNacimiento;
-	
+
 	@Temporal(TemporalType.DATE)
 	private Date hoFechaIngreso;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date hoFechaRegistro;
 
-	
+	@Column(length = 15)
+	private String hoStatus;
 
 	@Temporal(TemporalType.DATE)
 	private Date hoFechaSalida;
-	
-	@OneToMany(mappedBy="hoHomie", fetch=FetchType.LAZY)
+
+	@OneToMany(mappedBy = "hoHomie", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<HoPedidoHomie> hoPedidoList;
-	
 
 	public String getHoCedula() {
 		return hoCedula;
@@ -190,8 +188,8 @@ public class HoHomie {
 
 	public void setHoFechaSalida(Date hoFechaSalida) {
 		this.hoFechaSalida = hoFechaSalida;
-	}	
-	
+	}
+
 	public Date getHoFechaRegistro() {
 		return hoFechaRegistro;
 	}
@@ -207,6 +205,12 @@ public class HoHomie {
 	public void setHoPedidoList(List<HoPedidoHomie> hoPedidoList) {
 		this.hoPedidoList = hoPedidoList;
 	}
-	
-	
+
+	public String getHoStatus() {
+		return hoStatus;
+	}
+
+	public void setHoStatus(String hoStatus) {
+		this.hoStatus = hoStatus;
+	}
 }

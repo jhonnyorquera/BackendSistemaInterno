@@ -1,6 +1,7 @@
 package com.homie.backend.sisInterno.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,6 +10,7 @@ import static java.util.stream.Collectors.toList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.homie.backed.sisInterno.enums.StatusHomie;
 import com.homie.backend.sisInterno.dto.ListaPedidosDto;
 import com.homie.backend.sisInterno.dto.PedidoListDto;
 import com.homie.backend.sisInterno.dto.PedidoListDtoResponse;
@@ -20,7 +22,7 @@ import com.sun.el.stream.Optional;
 @Service
 public class HoPedidoHomieService {
 	private HoPedidoHomieRepository hoPedidoHomieRepository;
-	
+
 	@Autowired
 	private HoHomieRepository hoHomieRepository;
 
@@ -32,64 +34,55 @@ public class HoPedidoHomieService {
 		if (fecha == null) {
 			fecha = new Date();
 		}
-		
+
 		return homies(fecha);
 	}
-	
-	private List<PedidoListDtoResponse> homies(Date fecha){
+
+	private List<PedidoListDtoResponse> homies(Date fecha) {
 		List<PedidoListDtoResponse> listaResponse = new ArrayList<>();
-		//consultar homies con obra
-		
-		listaResponse.addAll(listaPedidosHomie(this.hoPedidoHomieRepository.getPedidosPorClienteFecha(ManejoFechas.quitarHora(fecha))));
-	
-		
-		//consuttar homies libres
-		listaResponse.addAll(listaPedidosHomie(this.hoPedidoHomieRepository.getHomiesLibres(ManejoFechas.quitarHora(fecha))));
-		
-		//unir 
+		listaResponse.addAll(listaPedidosHomie(
+				this.hoPedidoHomieRepository.getPedidosPorClienteFecha(ManejoFechas.quitarHora(fecha))));
+
 		return listaResponse;
-		
-		
+
 	}
-	
-	
 
 	private List<PedidoListDtoResponse> listaPedidosHomie(List<PedidoListDto> listaTotal) {
-		
-		List<PedidoListDtoResponse> homiesCompletos =new ArrayList<>();
-		homiesCompletos=hoPedidoHomieRepository.getHomiesLibres();
+
+		List<PedidoListDtoResponse> homiesCompletos = new ArrayList<>();
+		homiesCompletos = hoPedidoHomieRepository.getHomiesByStatus(StatusHomie.HABILITADO.getKey());
 
 		List<PedidoListDtoResponse> listaResponse = new ArrayList<>();
 
-		PedidoListDtoResponse pedidoBandera = creaObjetoResponse(listaTotal.get(0));
-		List<ListaPedidosDto> listaBandera = new ArrayList<>();
-		
+		if (!listaTotal.isEmpty()) {
+			PedidoListDtoResponse pedidoBandera = creaObjetoResponse(listaTotal.get(0));
+			List<ListaPedidosDto> listaBandera = new ArrayList<>();
 
-		for (PedidoListDto var : listaTotal) {
-					if (pedidoBandera.gethHoCedula().equals(var.getPlHoCedula()) ) {
-							listaBandera.add(crearElemento(var));
-			} 
-			else {	
-				pedidoBandera.setPedidos(listaBandera);
-				listaResponse.add(pedidoBandera);
-				pedidoBandera = new PedidoListDtoResponse();
-				listaBandera = new ArrayList<>();
-				listaBandera.add(crearElemento(var));
-				pedidoBandera = creaObjetoResponse(var);
+			for (PedidoListDto var : listaTotal) {
 
+				if (pedidoBandera.gethHoCedula().equals(var.getPlHoCedula())) {
+					listaBandera.add(crearElemento(var));
+				} else {
+					pedidoBandera.setPedidos(listaBandera);
+					listaResponse.add(pedidoBandera);
+					pedidoBandera = new PedidoListDtoResponse();
+					listaBandera = new ArrayList<>();
+					listaBandera.add(crearElemento(var));
+					pedidoBandera = creaObjetoResponse(var);
+
+				}
+				homiesCompletos.removeIf(
+						(PedidoListDtoResponse empleado) -> (empleado.gethHoCedula().equals(var.getPlHoCedula())));
+
+				if (!pedidoBandera.gethHoCedula().isEmpty() && !listaBandera.isEmpty()) {
+					pedidoBandera.setPedidos(listaBandera);
+					listaResponse.add(pedidoBandera);
+				}
+
+				homiesCompletos.add(pedidoBandera);
 			}
-
 		}
-		if(!pedidoBandera.gethHoCedula().isEmpty() && !listaBandera.isEmpty())
-		{
-			pedidoBandera.setPedidos(listaBandera);
-			listaResponse.add(pedidoBandera);
-		}
-		
-		
-		
-
-		return listaResponse;
+		return homiesCompletos;
 
 	}
 
@@ -104,7 +97,7 @@ public class HoPedidoHomieService {
 	}
 
 	private ListaPedidosDto crearElemento(PedidoListDto var) {
-	
+
 		ListaPedidosDto list = new ListaPedidosDto();
 		list.setLpNombreCliente(var.getPlNombreCliente());
 		list.setLpCantidadHoras(var.getPlCantidadHoras());
