@@ -13,6 +13,13 @@ public class PedidoListDtoResponse {
 	
 	
 	
+	public PedidoListDtoResponse(String hHoCedula, String hlHoNombre, String hlHoModalidad, String hlHoTelefono) {
+		super();
+		this.hHoCedula = hHoCedula;
+		this.hlHoNombre = hlHoNombre;
+		this.hlHoModalidad = hlHoModalidad;
+		this.hlHoTelefono = hlHoTelefono;
+	}
 	public String gethHoCedula() {
 		return hHoCedula;
 	}

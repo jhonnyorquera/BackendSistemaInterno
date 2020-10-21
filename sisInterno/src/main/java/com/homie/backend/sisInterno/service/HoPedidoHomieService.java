@@ -55,6 +55,9 @@ public class HoPedidoHomieService {
 	
 
 	private List<PedidoListDtoResponse> listaPedidosHomie(List<PedidoListDto> listaTotal) {
+		
+		List<PedidoListDtoResponse> homiesCompletos =new ArrayList<>();
+		homiesCompletos=hoPedidoHomieRepository.getHomiesLibres();
 
 		List<PedidoListDtoResponse> listaResponse = new ArrayList<>();
 
@@ -82,6 +85,9 @@ public class HoPedidoHomieService {
 			pedidoBandera.setPedidos(listaBandera);
 			listaResponse.add(pedidoBandera);
 		}
+		
+		
+		
 
 		return listaResponse;
 

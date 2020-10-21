@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.homie.backend.sisInterno.dto.PedidoListDto;
+import com.homie.backend.sisInterno.dto.PedidoListDtoResponse;
 import com.homie.backend.sisInterno.entity.HoPedidoHomie;
 
 public interface HoPedidoHomieRepository extends CrudRepository<HoPedidoHomie, String> {
@@ -16,8 +17,8 @@ public interface HoPedidoHomieRepository extends CrudRepository<HoPedidoHomie, S
 	public List<PedidoListDto> getPedidosPorClienteFecha(Date fecha);
 
 	
-	@Query("SELECT new com.homie.backend.sisInterno.dto.PedidoListDto(h.hoCedula, h.hoNombre, h.hoModalidad, h.hoTelefono) FROM HoHomie h")
-	public List<PedidoListDto> getHomiesLibres(Date fecha);
+	@Query("SELECT new com.homie.backend.sisInterno.dto.PedidoListDtoResponse(h.hoCedula, h.hoNombre, h.hoModalidad, h.hoTelefono) FROM HoHomie h")
+	public List<PedidoListDtoResponse> getHomiesLibres();
 
 	
 	
