@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.homie.backend.sisInterno.dto.ListaPedidosDto;
 import com.homie.backend.sisInterno.dto.PedidoListDto;
 import com.homie.backend.sisInterno.dto.PedidoListDtoRequest;
 import com.homie.backend.sisInterno.dto.PedidoListDtoResponse;
@@ -36,6 +37,16 @@ public class HoPedidoHomieController {
 	public ResponseEntity<List<PedidoListDtoResponse>> listarDisponible(
 			@RequestBody PedidoListDtoRequest entidad) {
 		List<PedidoListDtoResponse> lista = hoPedidoHomieService.getPedidosPorClienteFecha(entidad.fecha);
+		
+		for (PedidoListDtoResponse var : lista) {
+			if (var.getPedidos() != null) {
+				for (ListaPedidosDto aaa : var.getPedidos()) {
+					if (aaa.getLpFechaPedido() != null) {
+						System.out.println("fecha Pedido:  " + aaa.getLpFechaPedido());
+					}
+				}
+			}
+		}
 		return new ResponseEntity<List<PedidoListDtoResponse>>(lista, HttpStatus.OK);
 	}
 	
