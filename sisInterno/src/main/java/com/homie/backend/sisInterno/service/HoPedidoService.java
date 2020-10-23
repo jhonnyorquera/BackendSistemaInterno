@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.homie.backend.sisInterno.dto.CrearPedidoRequestDto;
+import com.homie.backend.sisInterno.entity.HoCatalogo;
 import com.homie.backend.sisInterno.entity.HoCliente;
 import com.homie.backend.sisInterno.entity.HoHomie;
 import com.homie.backend.sisInterno.entity.HoPedido;
@@ -41,29 +42,33 @@ public class HoPedidoService {
 		String codigoPedido = null;
 		// crearPedido
 		HoPedido pedido = new HoPedido();
-		pedido.setPeCantidadHoras(entidad.getCantidadHoras());
-		pedido.setPeFechaPedido(entidad.getFechaPedido());
-		pedido.setPeObservacion(entidad.getObservacion());
-		pedido.setPeValor(entidad.getValorServicio());
-		pedido.setPeEstado(entidad.getEstadoPedido());
+	
+		pedido.setPeCantidadHoras(entidad.getPeCantidadHoras());
+		pedido.setPeFechaPedido(entidad.getPeFechaPedido());
+		pedido.setPeObservacion(entidad.getPeObservacion());
+		pedido.setPeValor(entidad.getPeValor());
+		pedido.setPeEstado(entidad.getPeEstado());
 		pedido.setPeCodigo(generarCodigoPedido());
-		pedido.setHoCliente(hoClienteRepository.findByClId(entidad.getIdCliente()));
+		pedido.setPeDireccion(entidad.getPeDireccion());
+		pedido.setPeFechaCreacion(new Date());
+		pedido.setHoCliente(hoClienteRepository.findByClId(entidad.getPeCliente()));
+
 
 		// asigna pedido a servcios
-		for (HoPedidoServicio var : entidad.getServicios()) {
-			var.setHoPedido(pedido);
+		
+		 List<HoPedidoServicio> ps=new ArrayList<>();
+		for (HoCatalogo var : entidad.getPeServicios()) {
+			ps.add(new HoPedidoServicio(var.getSeNombre(), var.getSeValor(), pedido));
 		}
 
-		pedido.setHoPedidoServicioList(entidad.getServicios());
+		pedido.setHoPedidoServicioList(ps);
 
-		// buscar Cliente
-		// HoCliente cliente = new HoCliente();
-		// cliente = hoClienteRepository.findByClId(entidad.getIdCliente());
 
 		// guarda pedido
 		HoPedido hoPedidoGuardado = new HoPedido();
 
 		hoPedidoGuardado = hoPedidoRepository.save(pedido);
+		codigoPedido= hoPedidoGuardado.getPeCodigo();
 
 		// guardar pedido Servicio;
 		List<HoHomie> listaHomies = new ArrayList<>();
@@ -86,15 +91,15 @@ public class HoPedidoService {
 		String codigo = null;
 		Calendar fechaInicio = Calendar.getInstance();
 		fechaInicio.set(Calendar.DAY_OF_MONTH, 1);
-
-		Calendar fechaFin = fechaInicio;
+		Calendar fechaFin = Calendar.getInstance();
+		
+		fechaFin.set(Calendar.DAY_OF_MONTH, 1);
 		fechaFin.add(Calendar.MONTH, 1);
 		fechaFin.add(Calendar.DAY_OF_YEAR, -1);
+		
 
 		Long cantidad = hoPedidoRepository.findCantidad(fechaInicio.getTime(), fechaFin.getTime());
-
-		cantidad += 1;
-
+		cantidad=cantidad+1;
 		codigo = "PE" + fechaInicio.get(Calendar.YEAR)+fechaInicio.get(Calendar.MONTH)+"P"+cantidad.toString();
 		return codigo;
 

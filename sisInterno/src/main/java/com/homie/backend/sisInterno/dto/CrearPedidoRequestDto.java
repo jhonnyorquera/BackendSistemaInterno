@@ -3,63 +3,67 @@ package com.homie.backend.sisInterno.dto;
 import java.util.Date;
 import java.util.List;
 
+import com.homie.backend.sisInterno.entity.HoCatalogo;
 import com.homie.backend.sisInterno.entity.HoPedidoServicio;
 
 public class CrearPedidoRequestDto {
 
-	private Date fechaPedido;
-	private Long cantidadHoras;
-	private String observacion;
-	private Integer idCliente;
-	private Double valorServicio;
-	private String estadoPedido ;
+	private Date peFechaPedido;
+	private Long peCantidadHoras;
+	private String peObservacion;
+	private Integer peCliente;
+	private Double peValor;
+	private String peEstado ;
+	private String peDireccion;
 	private List<String> cedulasHomies;
-	private List<HoPedidoServicio> servicios;
+	private List<HoCatalogo> peServicios;
 	
 	
 	
 	
-	public List<HoPedidoServicio> getServicios() {
-		return servicios;
+	
+	public String getPeDireccion() {
+		return peDireccion;
 	}
-	public void setServicios(List<HoPedidoServicio> servicios) {
-		this.servicios = servicios;
+	public void setPeDireccion(String peDireccion) {
+		this.peDireccion = peDireccion;
 	}
-	public String getEstadoPedido() {
-		return estadoPedido;
+	public Date getPeFechaPedido() {
+		return peFechaPedido;
 	}
-	public void setEstadoPedido(String estadoPedido) {
-		this.estadoPedido = estadoPedido;
+	public void setPeFechaPedido(Date peFechaPedido) {
+		this.peFechaPedido = peFechaPedido;
 	}
-	public Date getFechaPedido() {
-		return fechaPedido;
+	public Long getPeCantidadHoras() {
+		return peCantidadHoras;
 	}
-	public void setFechaPedido(Date fechaPedido) {
-		this.fechaPedido = fechaPedido;
+	public void setPeCantidadHoras(Long peCantidadHoras) {
+		this.peCantidadHoras = peCantidadHoras;
 	}
-	public Long getCantidadHoras() {
-		return cantidadHoras;
+	public String getPeObservacion() {
+		return peObservacion;
 	}
-	public void setCantidadHoras(Long cantidadHoras) {
-		this.cantidadHoras = cantidadHoras;
+	public void setPeObservacion(String peObservacion) {
+		this.peObservacion = peObservacion;
 	}
-	public String getObservacion() {
-		return observacion;
+
+	public Integer getPeCliente() {
+		return peCliente;
 	}
-	public void setObservacion(String observacion) {
-		this.observacion = observacion;
+	public void setPeCliente(Integer peCliente) {
+		this.peCliente = peCliente;
 	}
-	public Integer getIdCliente() {
-		return idCliente;
+	public Double getPeValor() {
+		return peValor;
 	}
-	public void setIdCliente(Integer idCliente) {
-		this.idCliente = idCliente;
+	public void setPeValor(Double peValor) {
+		this.peValor = peValor;
 	}
-	public Double getValorServicio() {
-		return valorServicio;
+	public String getPeEstado() {
+		return peEstado;
 	}
-	public void setValorServicio(Double valorServicio) {
-		this.valorServicio = valorServicio;
+	public void setPeEstado(String peEstado) {
+		this.peEstado = peEstado;
 	}
 	public List<String> getCedulasHomies() {
 		return cedulasHomies;
@@ -67,7 +71,13 @@ public class CrearPedidoRequestDto {
 	public void setCedulasHomies(List<String> cedulasHomies) {
 		this.cedulasHomies = cedulasHomies;
 	}
-
-
+	public List<HoCatalogo> getPeServicios() {
+		return peServicios;
+	}
+	public void setPeServicios(List<HoCatalogo> peServicios) {
+		this.peServicios = peServicios;
+	}
+	
+	
 	
 }

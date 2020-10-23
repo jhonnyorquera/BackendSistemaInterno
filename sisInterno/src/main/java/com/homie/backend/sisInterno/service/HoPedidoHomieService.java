@@ -40,6 +40,8 @@ public class HoPedidoHomieService {
 
 	private List<PedidoListDtoResponse> homies(Date fecha) {
 		List<PedidoListDtoResponse> listaResponse = new ArrayList<>();
+		
+		System.out.println("fecha: "+ManejoFechas.quitarHora(fecha));
 		listaResponse.addAll(listaPedidosHomie(
 				this.hoPedidoHomieRepository.getPedidosPorClienteFecha(ManejoFechas.quitarHora(fecha))));
 
@@ -48,6 +50,9 @@ public class HoPedidoHomieService {
 	}
 
 	private List<PedidoListDtoResponse> listaPedidosHomie(List<PedidoListDto> listaTotal) {
+		
+	System.out.println("listado Tamaño"+listaTotal.size());
+		listaTotal.stream().forEach(System.out::println);
 
 		List<PedidoListDtoResponse> homiesCompletos = new ArrayList<>();
 		homiesCompletos = hoPedidoHomieRepository.getHomiesByStatus(StatusHomie.HABILITADO.getKey());

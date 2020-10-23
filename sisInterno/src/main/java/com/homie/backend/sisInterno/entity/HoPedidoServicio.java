@@ -29,6 +29,21 @@ public class HoPedidoServicio {
 	@ManyToOne
 	@JoinColumn(name="ho_pedido" ) 
 	private HoPedido hoPedido;
+	
+	
+	
+	
+
+	public HoPedidoServicio() {
+		super();
+	}
+
+	public HoPedidoServicio(String psNombre, Double psValor, HoPedido hoPedido) {
+		super();
+		this.psNombre = psNombre;
+		this.psValor = psValor;
+		this.hoPedido = hoPedido;
+	}
 
 	public Integer getPsCodigo() {
 		return psCodigo;

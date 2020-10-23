@@ -21,8 +21,11 @@ public class HoPedido {
 	@Id
 	private String peCodigo;
 	
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date peFechaPedido;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date peFechaCreacion;
 		
 	@Column(scale = 2)
 	private Long peCantidadHoras;
@@ -38,6 +41,20 @@ public class HoPedido {
 		
 	@Column(length = 300)
 	private String peEstado;
+	
+	@Column(length = 300)
+	private String peDireccion;
+
+	
+	public String getPeDireccion() {
+		return peDireccion;
+	}
+
+
+
+	public void setPeDireccion(String peDireccion) {
+		this.peDireccion = peDireccion;
+	}
 
 	@JsonIgnore
 	@OneToMany(mappedBy="hoPedido", cascade=CascadeType.ALL)
@@ -53,8 +70,7 @@ public class HoPedido {
 	@JoinColumn(name="ho_cliente" ) 
 	private HoCliente hoCliente;
 	
-	@Temporal(TemporalType.DATE)
-	private Date peFechaCreacion;
+
 	
 	
 	
