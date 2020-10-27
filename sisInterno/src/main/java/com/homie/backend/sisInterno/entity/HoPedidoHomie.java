@@ -34,6 +34,12 @@ public class HoPedidoHomie {
 	private HoPedido hoPedido;
 	
 	
+	
+	
+
+	public HoPedidoHomie() {
+		super();
+	}
 
 	public HoPedidoHomie(HoHomie hoHomie, HoPedido hoPedido) {
 		super();

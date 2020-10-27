@@ -1,5 +1,7 @@
 package com.homie.backend.sisInterno.utils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -14,4 +16,25 @@ public class ManejoFechas {
         return calendar.getTime();
         
     }
+	
+	public static Date transformarStringADate(String fecha) {
+
+		Date fechaRes = new Date();
+		SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ"); 
+		
+		
+		
+		try {
+			 fechaRes = formatter.parse(fecha.replaceAll("Z$", "+0000"));
+			
+		
+		} catch (ParseException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return fechaRes;
+		
+		
+	}
 }

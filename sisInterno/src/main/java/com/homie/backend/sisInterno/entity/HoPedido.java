@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class HoPedido {
 	
 	@Id
+	@Column(name="pe_codigo")
 	private String peCodigo;
 	
 	@Temporal(TemporalType.TIMESTAMP)
@@ -29,9 +30,9 @@ public class HoPedido {
 		
 	@Column(scale = 2)
 	private Long peCantidadHoras;
-	
-	@Column(length = 300)
-	private String peServicios;
+
+	@Column(scale = 2)
+	private String peTipo;
 	
 	@Column(length = 300)
 	private String peObservacion;
@@ -44,17 +45,17 @@ public class HoPedido {
 	
 	@Column(length = 300)
 	private String peDireccion;
+	
+	
+	@ManyToOne
+	@JoinColumn(name="ho_pedido_padre", referencedColumnName="pe_codigo")
+	private HoPedido hoPedidoPadre;
+	
+	@OneToMany(mappedBy="hoPedidoPadre")
+	private List<HoPedido> pedidosDependientes;
 
 	
-	public String getPeDireccion() {
-		return peDireccion;
-	}
 
-
-
-	public void setPeDireccion(String peDireccion) {
-		this.peDireccion = peDireccion;
-	}
 
 	@JsonIgnore
 	@OneToMany(mappedBy="hoPedido", cascade=CascadeType.ALL)
@@ -66,6 +67,9 @@ public class HoPedido {
 	@OneToMany(mappedBy="hoPedido", cascade=CascadeType.ALL)
 	private List<HoPedidoServicio> hoPedidoServicioList;
 	
+	@OneToMany(mappedBy="hoPedido", cascade=CascadeType.ALL)
+	private List<HoPedidoPagos> hoPedidoPagoList;
+	
 	@ManyToOne
 	@JoinColumn(name="ho_cliente" ) 
 	private HoCliente hoCliente;
@@ -75,7 +79,15 @@ public class HoPedido {
 	
 	
 
-	
+	public String getPeDireccion() {
+		return peDireccion;
+	}
+
+
+
+	public void setPeDireccion(String peDireccion) {
+		this.peDireccion = peDireccion;
+	}
 
 	public Date getPeFechaCreacion() {
 		return peFechaCreacion;
@@ -129,13 +141,6 @@ public class HoPedido {
 		this.peCantidadHoras = peCantidadHoras;
 	}
 
-	public String getPeServicios() {
-		return peServicios;
-	}
-
-	public void setPeServicios(String peServicios) {
-		this.peServicios = peServicios;
-	}
 
 	public String getPeObservacion() {
 		return peObservacion;
@@ -192,6 +197,57 @@ public class HoPedido {
 	public void setHoCliente(HoCliente hoCliente) {
 		this.hoCliente = hoCliente;
 	}
+
+
+
+	public List<HoPedidoPagos> getHoPedidoPagoList() {
+		return hoPedidoPagoList;
+	}
+
+
+
+	public void setHoPedidoPagoList(List<HoPedidoPagos> hoPedidoPagoList) {
+		this.hoPedidoPagoList = hoPedidoPagoList;
+	}
+
+
+
+	public HoPedido getHoPedidoPadre() {
+		return hoPedidoPadre;
+	}
+
+
+
+	public void setHoPedidoPadre(HoPedido hoPedidoPadre) {
+		this.hoPedidoPadre = hoPedidoPadre;
+	}
+
+
+
+	public List<HoPedido> getPedidosDependientes() {
+		return pedidosDependientes;
+	}
+
+
+
+	public void setPedidosDependientes(List<HoPedido> pedidosDependientes) {
+		this.pedidosDependientes = pedidosDependientes;
+	}
+
+
+
+	public String getPeTipo() {
+		return peTipo;
+	}
+
+
+
+	public void setPeTipo(String peTipo) {
+		this.peTipo = peTipo;
+	}
+
+
+
 	
 	
 	

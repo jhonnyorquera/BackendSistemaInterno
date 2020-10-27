@@ -4,19 +4,20 @@ import java.util.Date;
 import java.util.List;
 
 import com.homie.backend.sisInterno.entity.HoCatalogo;
+import com.homie.backend.sisInterno.entity.HoPedidoPagos;
 import com.homie.backend.sisInterno.entity.HoPedidoServicio;
 
 public class CrearPedidoRequestDto {
 
-	private Date peFechaPedido;
+	private List<Date> peFechasPedido;
 	private Long peCantidadHoras;
 	private String peObservacion;
 	private Integer peCliente;
-	private Double peValor;
 	private String peEstado ;
 	private String peDireccion;
 	private List<String> cedulasHomies;
 	private List<HoCatalogo> peServicios;
+	private List<HoPedidoPagos> pePagos;
 	
 	
 	
@@ -28,12 +29,9 @@ public class CrearPedidoRequestDto {
 	public void setPeDireccion(String peDireccion) {
 		this.peDireccion = peDireccion;
 	}
-	public Date getPeFechaPedido() {
-		return peFechaPedido;
-	}
-	public void setPeFechaPedido(Date peFechaPedido) {
-		this.peFechaPedido = peFechaPedido;
-	}
+	
+	
+	
 	public Long getPeCantidadHoras() {
 		return peCantidadHoras;
 	}
@@ -53,12 +51,7 @@ public class CrearPedidoRequestDto {
 	public void setPeCliente(Integer peCliente) {
 		this.peCliente = peCliente;
 	}
-	public Double getPeValor() {
-		return peValor;
-	}
-	public void setPeValor(Double peValor) {
-		this.peValor = peValor;
-	}
+	
 	public String getPeEstado() {
 		return peEstado;
 	}
@@ -76,6 +69,18 @@ public class CrearPedidoRequestDto {
 	}
 	public void setPeServicios(List<HoCatalogo> peServicios) {
 		this.peServicios = peServicios;
+	}
+	public List<HoPedidoPagos> getPePagos() {
+		return pePagos;
+	}
+	public void setPePagos(List<HoPedidoPagos> pePagos) {
+		this.pePagos = pePagos;
+	}
+	public List<Date> getPeFechasPedido() {
+		return peFechasPedido;
+	}
+	public void setPeFechasPedido(List<Date> peFechasPedido) {
+		this.peFechasPedido = peFechasPedido;
 	}
 	
 	

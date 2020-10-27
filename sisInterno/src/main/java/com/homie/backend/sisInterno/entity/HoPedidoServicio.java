@@ -38,10 +38,11 @@ public class HoPedidoServicio {
 		super();
 	}
 
-	public HoPedidoServicio(String psNombre, Double psValor, HoPedido hoPedido) {
+	public HoPedidoServicio(String psNombre,Integer psCantidad, Double psValor, HoPedido hoPedido) {
 		super();
 		this.psNombre = psNombre;
 		this.psValor = psValor;
+		this.psCantidad =psCantidad;
 		this.hoPedido = hoPedido;
 	}
 
