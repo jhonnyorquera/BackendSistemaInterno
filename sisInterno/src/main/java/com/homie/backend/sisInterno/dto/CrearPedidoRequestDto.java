@@ -9,12 +9,13 @@ import com.homie.backend.sisInterno.entity.HoPedidoServicio;
 
 public class CrearPedidoRequestDto {
 
-	private List<Date> peFechasPedido;
+	private List<Date> peFechaPedido;
 	private Long peCantidadHoras;
 	private String peObservacion;
 	private Integer peCliente;
 	private String peEstado ;
 	private String peDireccion;
+	private double peValor;
 	private List<String> cedulasHomies;
 	private List<HoCatalogo> peServicios;
 	private List<HoPedidoPagos> pePagos;
@@ -76,11 +77,17 @@ public class CrearPedidoRequestDto {
 	public void setPePagos(List<HoPedidoPagos> pePagos) {
 		this.pePagos = pePagos;
 	}
-	public List<Date> getPeFechasPedido() {
-		return peFechasPedido;
+	public List<Date> getPeFechaPedido() {
+		return peFechaPedido;
 	}
-	public void setPeFechasPedido(List<Date> peFechasPedido) {
-		this.peFechasPedido = peFechasPedido;
+	public void setPeFechaPedido(List<Date> peFechaPedido) {
+		this.peFechaPedido = peFechaPedido;
+	}
+	public double getPeValor() {
+		return peValor;
+	}
+	public void setPeValor(double peValor) {
+		this.peValor = peValor;
 	}
 	
 	

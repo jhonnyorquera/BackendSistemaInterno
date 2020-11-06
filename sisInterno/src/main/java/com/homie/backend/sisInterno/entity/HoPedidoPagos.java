@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class HoPedidoPagos {
 	
@@ -20,11 +22,18 @@ public class HoPedidoPagos {
 	@Column(length = 50)
 	private String ppFormaPago;
 	
-		
+	
+	@Column(length = 100)
+	private String ppComentario;
+	
+	
 	@Column(scale = 2)
 	private Double ppValor;
 	
+	
+	
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="ho_pedido" ) 
 	private HoPedido hoPedido;
 	
@@ -96,6 +105,22 @@ public class HoPedidoPagos {
 
 	public void setHoPedido(HoPedido hoPedido) {
 		this.hoPedido = hoPedido;
+	}
+
+
+
+
+
+	public String getPpComentario() {
+		return ppComentario;
+	}
+
+
+
+
+
+	public void setPpComentario(String ppComentario) {
+		this.ppComentario = ppComentario;
 	}
 
 

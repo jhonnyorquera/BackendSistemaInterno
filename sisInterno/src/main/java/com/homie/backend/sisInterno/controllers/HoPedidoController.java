@@ -1,13 +1,18 @@
 package com.homie.backend.sisInterno.controllers;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.homie.backend.sisInterno.dto.CrearPedidoRequestDto;
+import com.homie.backend.sisInterno.entity.HoPedido;
+import com.homie.backend.sisInterno.entity.HoPedidoHomie;
 import com.homie.backend.sisInterno.service.HoPedidoService;
 
 @RestController
@@ -21,7 +26,11 @@ public class HoPedidoController {
 		this.hoPedidoService = hoPedidoService;
 	}
 
-
+	@GetMapping
+	public ResponseEntity<List<HoPedido>> listar() {
+		List<HoPedido> lista = hoPedidoService.buscarPedidos();
+		return new ResponseEntity<List<HoPedido>>(lista, HttpStatus.OK);
+	}
 	
 
 	

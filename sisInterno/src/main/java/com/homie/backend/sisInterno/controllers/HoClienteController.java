@@ -6,6 +6,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,12 +43,23 @@ public class HoClienteController {
 		return new ResponseEntity<List<HoCliente>>(lista, HttpStatus.OK);
 	}
 	
+	
+	@GetMapping
+	@RequestMapping("/findByNombre/{name}")
+	public ResponseEntity<List<HoCliente>> findByNombre(@PathVariable String name) {
+		List<HoCliente> lista = hoClienteService.findByNombre(name);
+		System.out.println("tamaño de lista: "+lista.size());
+		return new ResponseEntity<List<HoCliente>>(lista, HttpStatus.OK);
+	}
+	
 	@PutMapping
 	public ResponseEntity<HoCliente> editar(@RequestBody HoCliente entidad) {
 		HoCliente updatedCliente = hoClienteService.editarCliente(entidad);
 		return new ResponseEntity<HoCliente>(updatedCliente, HttpStatus.OK);
 		
 	}
+	
+	
 	
 	
 }

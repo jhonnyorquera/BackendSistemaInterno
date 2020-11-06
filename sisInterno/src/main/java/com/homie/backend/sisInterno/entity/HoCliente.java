@@ -92,7 +92,7 @@ public class HoCliente {
 	}
 
 	public void setClNombre(String clNombre) {
-		this.clNombre = clNombre;
+		this.clNombre = clNombre.toUpperCase();
 	}
 
 	public String getClSector() {

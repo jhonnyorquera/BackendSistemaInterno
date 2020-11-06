@@ -17,6 +17,8 @@ import com.homie.backend.sisInterno.dto.ListaPedidosDto;
 import com.homie.backend.sisInterno.dto.PedidoListDto;
 import com.homie.backend.sisInterno.dto.PedidoListDtoRequest;
 import com.homie.backend.sisInterno.dto.PedidoListDtoResponse;
+import com.homie.backend.sisInterno.entity.HoHomie;
+import com.homie.backend.sisInterno.entity.HoPedidoHomie;
 import com.homie.backend.sisInterno.service.HoPedidoHomieService;
 
 @RestController
@@ -49,6 +51,17 @@ public class HoPedidoHomieController {
 		}
 		return new ResponseEntity<List<PedidoListDtoResponse>>(lista, HttpStatus.OK);
 	}
+	
+	
+	@GetMapping
+	public ResponseEntity<List<HoPedidoHomie>> listar() {
+		List<HoPedidoHomie> lista = hoPedidoHomieService.buscarPedidos();
+		return new ResponseEntity<List<HoPedidoHomie>>(lista, HttpStatus.OK);
+	}
+	
+	
+	
+	
 	
 	
 	

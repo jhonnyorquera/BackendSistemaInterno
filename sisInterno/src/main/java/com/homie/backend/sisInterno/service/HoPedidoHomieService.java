@@ -14,6 +14,7 @@ import com.homie.backed.sisInterno.enums.StatusHomie;
 import com.homie.backend.sisInterno.dto.ListaPedidosDto;
 import com.homie.backend.sisInterno.dto.PedidoListDto;
 import com.homie.backend.sisInterno.dto.PedidoListDtoResponse;
+import com.homie.backend.sisInterno.entity.HoPedidoHomie;
 import com.homie.backend.sisInterno.repositories.HoHomieRepository;
 import com.homie.backend.sisInterno.repositories.HoPedidoHomieRepository;
 import com.homie.backend.sisInterno.utils.ManejoFechas;
@@ -28,6 +29,11 @@ public class HoPedidoHomieService {
 
 	public HoPedidoHomieService(HoPedidoHomieRepository hoPedidoHomieRepository) {
 		this.hoPedidoHomieRepository = hoPedidoHomieRepository;
+	}
+	
+	
+	public  List<HoPedidoHomie> buscarPedidos(){
+		return (List<HoPedidoHomie>) hoPedidoHomieRepository.findAll();
 	}
 
 	public List<PedidoListDtoResponse> getPedidosPorClienteFecha(Date fecha) {

@@ -33,6 +33,10 @@ public class HoPedidoService {
 	public HoPedidoService(HoPedidoRepository hoPedidoRepository) {
 		this.hoPedidoRepository = hoPedidoRepository;
 	}
+	
+	public List<HoPedido> buscarPedidos(){
+		return (List<HoPedido>) this.hoPedidoRepository.findAll();
+	}
 
 	public String guardarPedido(CrearPedidoRequestDto entidad) {
 
@@ -47,7 +51,7 @@ public class HoPedidoService {
 		pedido.setPeDireccion(entidad.getPeDireccion());
 		pedido.setPeFechaCreacion(new Date());
 		pedido.setHoCliente(hoClienteRepository.findByClId(entidad.getPeCliente()));
-		pedido.setPeFechaPedido(entidad.getPeFechasPedido().get(0));
+		pedido.setPeFechaPedido(entidad.getPeFechaPedido().get(0));
 
 		// asigna pedido a servcios
 		List<HoPedidoServicio> ps = new ArrayList<>();
@@ -56,7 +60,8 @@ public class HoPedidoService {
 		}
 		pedido.setHoPedidoServicioList(ps);
 		pedido.setHoPedidoPagoList(entidad.getPePagos());
-		pedido.setPeValor(entidad.getPeServicios().stream().mapToDouble(o-> o.getSeValor()).sum());
+		
+		pedido.setPeValor(entidad.getPeValor());
 		// asigna pedido a pagos
 		entidad.getPePagos().stream().forEach((a) -> a.setHoPedido(pedido));
 		//agrega lista de servicios por homie
@@ -72,9 +77,9 @@ public class HoPedidoService {
          		
 		List<HoPedido> listaPedidods = new ArrayList<>();
 
-		if (entidad.getPeFechasPedido().size() > 1) {
-			entidad.getPeFechasPedido().remove(0);
-			for (Date var : entidad.getPeFechasPedido()) {
+		if (entidad.getPeFechaPedido().size() > 1) {
+			entidad.getPeFechaPedido().remove(0);
+			for (Date var : entidad.getPeFechaPedido()) {
 				HoPedido auxPedido = new HoPedido();
 				auxPedido = pedido;
 				auxPedido.setPeFechaPedido(var);

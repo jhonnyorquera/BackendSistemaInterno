@@ -62,6 +62,7 @@ public class crearEsquemas {
 			HoCliente cli = new HoCliente();
 			cli.setClCedulaRuc("172026886" + a);
 			cli.setClCorreo(a + "corre@hotmail.com");
+			cli.setClNombre(a+"Nombre"+a+" Apellido"+a+" LAST NAME");
 			cli.setClDireccion(random.ints(10, 1, 7).toString() + "interseccion" + random.ints(10, 1, 7).toString());
 			cli.setClFechaRegistro(new Date());
 			cli.setClSector(random.ints(10, 11, 12).toString());

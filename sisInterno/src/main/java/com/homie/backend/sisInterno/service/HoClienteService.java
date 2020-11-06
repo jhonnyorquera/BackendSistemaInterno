@@ -12,12 +12,10 @@ import com.homie.backend.sisInterno.repositories.HoClienteRepository;
 public class HoClienteService {
 	private HoClienteRepository hoClienteRepository;
 
-	
 	public HoClienteService(HoClienteRepository hoClienteRepository) {
 		this.hoClienteRepository = hoClienteRepository;
 	}
-	
-	
+
 	public HoCliente registrarCliente(HoCliente hoCliente) {
 		hoCliente.setClFechaRegistro(new Date());
 		if (hoClienteRepository.findByClCedulaRuc(hoCliente.getClCedulaRuc()) != null) {
@@ -25,17 +23,20 @@ public class HoClienteService {
 		}
 		return hoClienteRepository.save(hoCliente);
 	}
-	
-	
+
 	public HoCliente editarCliente(HoCliente hoCliente) {
 		return hoClienteRepository.save(hoCliente);
 	}
-	
-	
+
 	public List<HoCliente> listarClientes() {
-		
+
 		return (List<HoCliente>) hoClienteRepository.findAll();
-		
+
 	}
-	
+
+	public List<HoCliente> findByNombre(String name) {
+		System.out.println("name_ "+name);
+		return hoClienteRepository.findByClNombreContaining(name);
+	}
+
 }
