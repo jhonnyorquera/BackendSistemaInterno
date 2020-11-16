@@ -30,6 +30,8 @@ public class HoPedidoPagos {
 	@Column(scale = 2)
 	private Double ppValor;
 	
+	@Column
+	private boolean ppEstado;
 	
 	
 	@ManyToOne
@@ -38,10 +40,33 @@ public class HoPedidoPagos {
 	private HoPedido hoPedido;
 	
 	
+	
+	
 		
 	public HoPedidoPagos() {
 		super();
 	}
+
+
+
+
+
+	
+
+
+
+
+
+	public HoPedidoPagos(HoPedido hoPedido) {
+		super();
+		this.hoPedido = hoPedido;
+	}
+
+
+
+
+
+
 
 
 
@@ -121,6 +146,22 @@ public class HoPedidoPagos {
 
 	public void setPpComentario(String ppComentario) {
 		this.ppComentario = ppComentario;
+	}
+
+
+
+
+
+	public boolean isPpEstado() {
+		return ppEstado;
+	}
+
+
+
+
+
+	public void setPpEstado(boolean ppEstado) {
+		this.ppEstado = ppEstado;
 	}
 
 

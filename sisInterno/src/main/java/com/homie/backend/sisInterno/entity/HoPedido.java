@@ -52,12 +52,13 @@ public class HoPedido {
 	private HoPedido hoPedidoPadre;
 	
 	@OneToMany(mappedBy="hoPedidoPadre")
+	@JsonIgnore
 	private List<HoPedido> pedidosDependientes;
 
 	
 
 
-	@JsonIgnore
+	
 	@OneToMany(mappedBy="hoPedido", cascade=CascadeType.ALL)
 	private List<HoPedidoHomie> hoHomieList;
 	
@@ -78,6 +79,13 @@ public class HoPedido {
 	
 	
 	
+
+	public HoPedido(String peCodigo) {
+		super();
+		this.peCodigo = peCodigo;
+	}
+
+
 
 	public String getPeDireccion() {
 		return peDireccion;

@@ -6,8 +6,11 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import com.homie.backend.sisInterno.dto.BusquedaDto;
 import com.homie.backend.sisInterno.dto.PedidoListDto;
 import com.homie.backend.sisInterno.dto.PedidoListDtoResponse;
+import com.homie.backend.sisInterno.entity.HoHomie;
+import com.homie.backend.sisInterno.entity.HoPedido;
 import com.homie.backend.sisInterno.entity.HoPedidoHomie;
 
 public interface HoPedidoHomieRepository extends CrudRepository<HoPedidoHomie, String> {
@@ -17,5 +20,14 @@ public interface HoPedidoHomieRepository extends CrudRepository<HoPedidoHomie, S
 
 	@Query("SELECT new com.homie.backend.sisInterno.dto.PedidoListDtoResponse(h.hoCedula, h.hoNombre, h.hoModalidad, h.hoTelefono) FROM HoHomie h where h.hoStatus=?1 order by h.hoCedula")
 	public List<PedidoListDtoResponse> getHomiesByStatus(String status);
+	
+	public HoPedidoHomie findByHoPeHoId(Integer id);
+	
+	public List<HoPedidoHomie> findByHoPedido(HoPedido hoPedido);
+	
+	@Query("SELECT hope from HoPedidoHomie hope where hope.hoPedido =?1 and hope.hoHomie =?2")
+	public HoPedidoHomie getByPedidoHomie(HoPedido varUno, HoHomie varDos);
+
+
 
 }

@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
@@ -23,6 +25,8 @@ public class HoPedidoHomie {
 	@Column(scale = 2)
 	private Double hoPeHoCalificacion;
 	
+	@Column
+	private boolean hoPeStatus;
 	
 	@ManyToOne
 	@JoinColumn(name="ho_homie")
@@ -30,6 +34,7 @@ public class HoPedidoHomie {
 		
 
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="ho_pedido" ) 
 	private HoPedido hoPedido;
 	
@@ -78,6 +83,16 @@ public class HoPedidoHomie {
 	public void setHoPedido(HoPedido hoPedido) {
 		this.hoPedido = hoPedido;
 	}
+
+	public boolean isHoPeStatus() {
+		return hoPeStatus;
+	}
+
+	public void setHoPeStatus(boolean hoPeStatus) {
+		this.hoPeStatus = hoPeStatus;
+	}
+
+
 	
 	
 	

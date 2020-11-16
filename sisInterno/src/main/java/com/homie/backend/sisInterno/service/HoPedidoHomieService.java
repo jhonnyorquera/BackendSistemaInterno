@@ -11,12 +11,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.homie.backed.sisInterno.enums.StatusHomie;
+import com.homie.backend.sisInterno.dto.BusquedaDto;
+import com.homie.backend.sisInterno.dto.BusquedaResponseDto;
+import com.homie.backend.sisInterno.dto.HoPedidoHomieCrearDto;
 import com.homie.backend.sisInterno.dto.ListaPedidosDto;
 import com.homie.backend.sisInterno.dto.PedidoListDto;
 import com.homie.backend.sisInterno.dto.PedidoListDtoResponse;
+import com.homie.backend.sisInterno.entity.HoHomie;
+import com.homie.backend.sisInterno.entity.HoPedido;
 import com.homie.backend.sisInterno.entity.HoPedidoHomie;
 import com.homie.backend.sisInterno.repositories.HoHomieRepository;
 import com.homie.backend.sisInterno.repositories.HoPedidoHomieRepository;
+import com.homie.backend.sisInterno.repositories.HoPedidoRepository;
 import com.homie.backend.sisInterno.utils.ManejoFechas;
 import com.sun.el.stream.Optional;
 
@@ -27,12 +33,14 @@ public class HoPedidoHomieService {
 	@Autowired
 	private HoHomieRepository hoHomieRepository;
 
+	@Autowired
+	private HoPedidoRepository hoPedidoRepository;
+
 	public HoPedidoHomieService(HoPedidoHomieRepository hoPedidoHomieRepository) {
 		this.hoPedidoHomieRepository = hoPedidoHomieRepository;
 	}
-	
-	
-	public  List<HoPedidoHomie> buscarPedidos(){
+
+	public List<HoPedidoHomie> buscarPedidos() {
 		return (List<HoPedidoHomie>) hoPedidoHomieRepository.findAll();
 	}
 
@@ -50,8 +58,6 @@ public class HoPedidoHomieService {
 		listaResponse.addAll(listaPedidosHomie(
 				this.hoPedidoHomieRepository.getPedidosPorClienteFecha(ManejoFechas.quitarHora(fecha))));
 
-		
-
 		return listaResponse;
 
 	}
@@ -68,7 +74,6 @@ public class HoPedidoHomieService {
 			List<ListaPedidosDto> listaBandera = new ArrayList<>();
 
 			for (PedidoListDto var : listaTotal) {
-				System.out.println("hora: " + var.getPlFechaPedido());
 
 				if (pedidoBandera.gethHoCedula().equals(var.getPlHoCedula())) {
 					listaBandera.add(crearElemento(var));
@@ -114,6 +119,40 @@ public class HoPedidoHomieService {
 		list.setLpEstado(var.getPlEstado());
 		list.setLpFechaPedido(var.getPlFechaPedido());
 		return list;
+	}
+
+	public HoPedidoHomie update(HoPedidoHomie entity) {
+		HoPedidoHomie pedido = new HoPedidoHomie();
+		pedido = hoPedidoHomieRepository.findByHoPeHoId(entity.getHoPeHoId());
+		pedido.setHoPeHoCalificacion(entity.getHoPeHoCalificacion());
+		pedido.setHoPeStatus(entity.isHoPeStatus());
+		return hoPedidoHomieRepository.save(pedido);
+	}
+
+	public List<HoPedidoHomie> crear(HoPedidoHomieCrearDto entity) {
+		// buscar homie
+
+		HoPedido pedido = new HoPedido();
+		pedido = hoPedidoRepository.findByPeCodigo(entity.getPeCodigo());
+		List<HoHomie> homies = new ArrayList<>();
+		for (String var : entity.getCedulaHomies()) {
+			homies.add(this.hoHomieRepository.findByHoCedula(var));
+		}
+		return crearPedidoHomie(homies, pedido);
+	}
+
+	private List<HoPedidoHomie> crearPedidoHomie(List<HoHomie> homies, HoPedido pedidos) {
+		for (HoHomie hom : homies) {			
+			if (this.hoPedidoHomieRepository.getByPedidoHomie(pedidos, hom) == null) {
+				HoPedidoHomie var = new HoPedidoHomie();
+				var.setHoHomie(hom);
+				var.setHoPedido(pedidos);
+				var.setHoPeStatus(true);
+				this.hoPedidoHomieRepository.save(var);
+			}
+		}
+
+		return this.hoPedidoHomieRepository.findByHoPedido(pedidos);
 	}
 
 }

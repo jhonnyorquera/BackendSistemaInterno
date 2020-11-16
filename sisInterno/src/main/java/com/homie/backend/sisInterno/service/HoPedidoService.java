@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.homie.backed.sisInterno.enums.TipoPedido;
+import com.homie.backend.sisInterno.dto.BusquedaDto;
+import com.homie.backend.sisInterno.dto.BusquedaResponseDto;
 import com.homie.backend.sisInterno.dto.CrearPedidoRequestDto;
+import com.homie.backend.sisInterno.dto.PedidoListDto;
 import com.homie.backend.sisInterno.entity.HoCatalogo;
 import com.homie.backend.sisInterno.entity.HoHomie;
 import com.homie.backend.sisInterno.entity.HoPedido;
@@ -17,7 +20,7 @@ import com.homie.backend.sisInterno.entity.HoPedidoServicio;
 import com.homie.backend.sisInterno.repositories.HoClienteRepository;
 import com.homie.backend.sisInterno.repositories.HoHomieRepository;
 import com.homie.backend.sisInterno.repositories.HoPedidoRepository;
-
+import com.homie.backend.sisInterno.utils.ManejoFechas;
 
 @Service
 public class HoPedidoService {
@@ -29,12 +32,11 @@ public class HoPedidoService {
 	@Autowired
 	private HoClienteRepository hoClienteRepository;
 
-
 	public HoPedidoService(HoPedidoRepository hoPedidoRepository) {
 		this.hoPedidoRepository = hoPedidoRepository;
 	}
-	
-	public List<HoPedido> buscarPedidos(){
+
+	public List<HoPedido> buscarPedidos() {
 		return (List<HoPedido>) this.hoPedidoRepository.findAll();
 	}
 
@@ -45,9 +47,9 @@ public class HoPedidoService {
 		HoPedido pedido = new HoPedido();
 		pedido.setPeCantidadHoras(entidad.getPeCantidadHoras());
 		// pedido.setPeFechaPedido(entidad.getPeFechaPedido());
-		pedido.setPeObservacion(entidad.getPeObservacion());		
+		pedido.setPeObservacion(entidad.getPeObservacion());
 		pedido.setPeEstado(entidad.getPeEstado());
-		pedido.setPeCodigo("PR"+generarCodigoPedido());
+		pedido.setPeCodigo("PR" + generarCodigoPedido());
 		pedido.setPeDireccion(entidad.getPeDireccion());
 		pedido.setPeFechaCreacion(new Date());
 		pedido.setHoCliente(hoClienteRepository.findByClId(entidad.getPeCliente()));
@@ -56,25 +58,23 @@ public class HoPedidoService {
 		// asigna pedido a servcios
 		List<HoPedidoServicio> ps = new ArrayList<>();
 		for (HoCatalogo var : entidad.getPeServicios()) {
-			ps.add(new HoPedidoServicio(var.getSeNombre(),var.getSeCantidad(), var.getSeValor(), pedido));
+			ps.add(new HoPedidoServicio(var.getSeNombre(), var.getSeCantidad(), var.getSeValor(), pedido));
 		}
 		pedido.setHoPedidoServicioList(ps);
 		pedido.setHoPedidoPagoList(entidad.getPePagos());
-		
+
 		pedido.setPeValor(entidad.getPeValor());
 		// asigna pedido a pagos
 		entidad.getPePagos().stream().forEach((a) -> a.setHoPedido(pedido));
-		//agrega lista de servicios por homie
+		// agrega lista de servicios por homie
 		pedido.setHoHomieList(crearListaServiciosXHomie(entidad.getCedulasHomies(), pedido));
 		pedido.setPeTipo(TipoPedido.PRINCIPAL.getKey());
-		
+
 		// guarda pedido
 		HoPedido hoPedidoGuardado = new HoPedido();
 		hoPedidoGuardado = hoPedidoRepository.save(pedido);
 		codigoPedido = hoPedidoGuardado.getPeCodigo();
-		
-		
-         		
+
 		List<HoPedido> listaPedidods = new ArrayList<>();
 
 		if (entidad.getPeFechaPedido().size() > 1) {
@@ -83,7 +83,7 @@ public class HoPedidoService {
 				HoPedido auxPedido = new HoPedido();
 				auxPedido = pedido;
 				auxPedido.setPeFechaPedido(var);
-				auxPedido.setPeCodigo("PL"+this.generarCodigoPedido());
+				auxPedido.setPeCodigo("PL" + this.generarCodigoPedido());
 				auxPedido.setHoPedidoPadre(hoPedidoGuardado);
 				auxPedido.setHoPedidoPagoList(null);
 				auxPedido.setPeValor(null);
@@ -95,13 +95,14 @@ public class HoPedidoService {
 		return codigoPedido;
 	}
 
-	
-/**
- * Crea lista de pedidosHomie buscando los homies con la cedula de identidad y creando entidadees
- * @param homies lista de homies
- * @param pedido lista de pedidos
- * @return lista completa
- */
+	/**
+	 * Crea lista de pedidosHomie buscando los homies con la cedula de identidad y
+	 * creando entidadees
+	 * 
+	 * @param homies lista de homies
+	 * @param pedido lista de pedidos
+	 * @return lista completa
+	 */
 	private List<HoPedidoHomie> crearListaServiciosXHomie(List<String> homies, HoPedido pedido) {
 		// guardar pedido Servicio;
 		List<HoHomie> listaHomies = new ArrayList<>();
@@ -130,11 +131,47 @@ public class HoPedidoService {
 
 		Long cantidad = hoPedidoRepository.findCantidad(fechaInicio.getTime(), fechaFin.getTime());
 		cantidad = cantidad + 1;
-		
-		
-		codigo =fechaInicio.get(Calendar.YEAR) +"M"+ fechaInicio.get(Calendar.MONTH) + "N" + cantidad.toString();
+
+		codigo = fechaInicio.get(Calendar.YEAR) + "M" + fechaInicio.get(Calendar.MONTH)+ "N" + cantidad.toString();
 		return codigo;
 
+	}
+
+	public HoPedido findPedidoById(String codigo) {
+		return hoPedidoRepository.findByPeCodigo(codigo);
+
+	}
+	 public HoPedido editar(HoPedido entity) {
+		 
+		 return hoPedidoRepository.save(entity);
+	 }
+	
+
+	public List<BusquedaResponseDto> buscarPedidos(BusquedaDto var) {
+		System.out.println("--entra a servicio--");
+		List<BusquedaResponseDto> lista = new ArrayList<>();
+		if (var.getCodigo() != null) {
+			System.out.println("codigo: " + var.getCodigo());
+			lista = this.hoPedidoRepository.buscarPedidosXCodigo(var.getCodigo());
+		} else {
+
+			if (var.getFechaInicio() == null) {
+				Calendar today = Calendar.getInstance();
+				today.set(Calendar.MONTH, -1);
+				var.setFechaInicio(ManejoFechas.quitarHora(today.getTime()));
+				today.set(Calendar.MONTH, 2);
+				var.setFechaFin(ManejoFechas.quitarHora(today.getTime()));
+
+			}
+			if(var.getFechaInicio()!=null && var.getFechaFin()==null) {
+				
+			}
+
+			lista = this.hoPedidoRepository.buscarPedidosXCampos(String.valueOf(var.getCliente()), var.getFechaInicio(),
+					var.getFechaFin(), var.getEstado());
+
+		}
+		return lista;
 	}
 
 }
