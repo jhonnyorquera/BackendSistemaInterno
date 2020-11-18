@@ -19,7 +19,6 @@ public class HoCatalogoService {
 	
 	
 	public HoCatalogo registrarCatalogo(HoCatalogo hoCatalogo) {
-		hoCatalogo.setSeNombre(hoCatalogo.getSeNombre().toUpperCase());
 		return hoCatalogoRepository.save(hoCatalogo);
 	}
 	
