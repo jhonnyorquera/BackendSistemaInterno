@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.homie.backed.sisInterno.enums.TipoPedido;
 import com.homie.backend.sisInterno.dto.BusquedaDto;
+import com.homie.backend.sisInterno.dto.BusquedaDtoIn;
 import com.homie.backend.sisInterno.dto.BusquedaResponseDto;
 import com.homie.backend.sisInterno.dto.CrearPedidoRequestDto;
-import com.homie.backend.sisInterno.dto.PedidoListDto;
 import com.homie.backend.sisInterno.entity.HoCatalogo;
 import com.homie.backend.sisInterno.entity.HoHomie;
 import com.homie.backend.sisInterno.entity.HoPedido;
@@ -132,7 +132,7 @@ public class HoPedidoService {
 		Long cantidad = hoPedidoRepository.findCantidad(fechaInicio.getTime(), fechaFin.getTime());
 		cantidad = cantidad + 1;
 
-		codigo = fechaInicio.get(Calendar.YEAR) + "M" + fechaInicio.get(Calendar.MONTH)+ "N" + cantidad.toString();
+		codigo = fechaInicio.get(Calendar.YEAR) + "M" + fechaInicio.get(Calendar.MONTH) + "N" + cantidad.toString();
 		return codigo;
 
 	}
@@ -141,37 +141,74 @@ public class HoPedidoService {
 		return hoPedidoRepository.findByPeCodigo(codigo);
 
 	}
-	 public HoPedido editar(HoPedido entity) {
-		 
-		 return hoPedidoRepository.save(entity);
-	 }
-	
+
+	public HoPedido editar(HoPedido entity) {
+
+		return hoPedidoRepository.save(entity);
+	}
 
 	public List<BusquedaResponseDto> buscarPedidos(BusquedaDto var) {
-		System.out.println("--entra a servicio--");
+
 		List<BusquedaResponseDto> lista = new ArrayList<>();
-		if (var.getCodigo() != null) {
-			System.out.println("codigo: " + var.getCodigo());
+		if (var.getCodigo().length() > 2) {
 			lista = this.hoPedidoRepository.buscarPedidosXCodigo(var.getCodigo());
 		} else {
-
-			if (var.getFechaInicio() == null) {
+			
+			if (var.getFechaInicio() == null && var.getFechaFin() == null) {
 				Calendar today = Calendar.getInstance();
-				today.set(Calendar.MONTH, -1);
+				today.add(Calendar.MONTH, -1);
 				var.setFechaInicio(ManejoFechas.quitarHora(today.getTime()));
-				today.set(Calendar.MONTH, 2);
+				today.add(Calendar.MONTH, 2);
 				var.setFechaFin(ManejoFechas.quitarHora(today.getTime()));
 
 			}
-			if(var.getFechaInicio()!=null && var.getFechaFin()==null) {
-				
-			}
 
-			lista = this.hoPedidoRepository.buscarPedidosXCampos(String.valueOf(var.getCliente()), var.getFechaInicio(),
-					var.getFechaFin(), var.getEstado());
+			if (var.getFechaInicio() != null && var.getFechaFin() == null) {
+				Calendar today =Calendar.getInstance();
+				today.setTime(var.getFechaInicio());
+				today.add(Calendar.MONTH, 2);
+				var.setFechaFin(today.getTime());
+			}
+			
+			if (var.getFechaInicio() == null && var.getFechaFin() != null) {
+				Calendar today =Calendar.getInstance();
+				today.setTime(var.getFechaFin());
+				today.add(Calendar.MONTH, -2);
+				var.setFechaInicio(today.getTime());
+			}
+			
+
+			if(var.getCliente()== null) {
+				var.setCliente("");				
+			}
+			if(var.getEstado() ==null) {
+				var.setEstado("");
+			}
+			
+			
+			List<BusquedaDtoIn> busqueda = this.hoPedidoRepository.buscarPedidosXCamposInter("%"+var.getEstado()+"%", 
+					"%"+var.getCliente()+"%", var.getFechaInicio(), var.getFechaFin());
+
+			for (BusquedaDtoIn varAux : busqueda) {
+				lista.add(crearObjeto(varAux));
+			}
 
 		}
 		return lista;
+	}
+
+	private final BusquedaResponseDto crearObjeto(BusquedaDtoIn var) {
+
+		BusquedaResponseDto aux = new BusquedaResponseDto();
+		aux.setPeCodigo(var.getPeCodigo());
+		aux.setClCliente(var.getClCliente());
+		aux.setPeEstado(var.getPeEstado());
+		aux.setPeCantidadHoras(var.getPeCantidadHoras());
+		aux.setPePadre(var.getPePadre());
+		aux.setPeTipo(var.getPeTipo());
+		aux.setPeFecha(var.getPeFecha());
+
+		return aux;
 	}
 
 }

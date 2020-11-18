@@ -4,17 +4,17 @@ import java.util.Date;
 
 public class BusquedaDto {
 	
-	  private Integer cliente;
+	  private String cliente;
       private Date fechaInicio;
       private Date fechaFin;
       private String estado;
       private String codigo;
 	
       
-      public Integer getCliente() {
+      public String getCliente() {
 		return cliente;
 	}
-	public void setCliente(Integer cliente) {
+	public void setCliente(String cliente) {
 		this.cliente = cliente;
 	}
 	public Date getFechaInicio() {

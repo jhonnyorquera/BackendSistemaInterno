@@ -2,7 +2,7 @@ package com.homie.backend.sisInterno.dto;
 
 import java.util.Date;
 
-public class BusquedaResponseDto {
+public class BusquedaResponseDto implements BusquedaDtoIn {
 	
 	private String peCodigo;
 	private String clCliente;
@@ -14,6 +14,12 @@ public class BusquedaResponseDto {
 	
 	
 	
+	
+	public BusquedaResponseDto() {
+		super();
+	}
+
+
 	public BusquedaResponseDto(String peCodigo, String clCliente, Date peFecha, String peEstado, Long peCantidadHoras,
 			String peTipo, String pePadre) {
 		super();
