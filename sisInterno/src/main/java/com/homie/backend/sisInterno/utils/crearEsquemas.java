@@ -63,8 +63,10 @@ public class crearEsquemas {
 			cli.setClCedulaRuc("172026886" + a);
 			cli.setClCorreo(a + "corre@hotmail.com");
 			cli.setClNombre(a+"Nombre"+a+" Apellido"+a+" LAST NAME");
-			cli.setClDireccion(random.ints(10, 1, 7).toString() + "interseccion" + random.ints(10, 1, 7).toString());
+			cli.setClDireccion(random.ints(5, 1, 7).toString() + " interseccion " + random.ints(10, 1, 7).toString());
 			cli.setClFechaRegistro(new Date());
+			cli.setObFactura("Mismos datos del cliente");
+			cli.setClTelefono("0998 9990 999");
 			cli.setClSector(random.ints(10, 11, 12).toString());
 			clienteRepository.save(cli);
 

@@ -46,11 +46,17 @@ public class HoPedidoHomie {
 		super();
 	}
 
-	public HoPedidoHomie(HoHomie hoHomie, HoPedido hoPedido) {
+
+
+	public HoPedidoHomie(HoHomie hoHomie, HoPedido hoPedido,boolean hoPeStatus ) {
 		super();
+		
 		this.hoHomie = hoHomie;
 		this.hoPedido = hoPedido;
+		this.hoPeStatus = hoPeStatus;
 	}
+
+
 
 	public Integer getHoPeHoId() {
 		return hoPeHoId;

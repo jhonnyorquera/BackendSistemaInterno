@@ -18,7 +18,7 @@ public class HoHomie {
 	@Id
 	private String hoCedula;
 
-	@Column(length = 50)
+	@Column(length = 70)
 	private String hoNombre;
 
 	@Column(length = 30)
@@ -83,7 +83,7 @@ public class HoHomie {
 	}
 
 	public void setHoNombre(String hoNombre) {
-		this.hoNombre = hoNombre;
+		this.hoNombre = hoNombre.toUpperCase();
 	}
 
 	public String getHoTelefono() {
@@ -99,7 +99,7 @@ public class HoHomie {
 	}
 
 	public void setHoCorreo(String hoCorreo) {
-		this.hoCorreo = hoCorreo;
+		this.hoCorreo = hoCorreo.toLowerCase();
 	}
 
 	public String getHoNroCuenta() {

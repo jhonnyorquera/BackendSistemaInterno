@@ -6,8 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-
-
+import com.homie.backed.sisInterno.enums.StatusHomie;
 import com.homie.backend.sisInterno.entity.HoHomie;
 import com.homie.backend.sisInterno.repositories.HoHomieRepository;
 
@@ -23,6 +22,7 @@ public class HoHomieService {
 	
 	public HoHomie registrarHomie(HoHomie hoHomie) {
 		hoHomie.setHoFechaRegistro(new Date());
+		hoHomie.setHoStatus(StatusHomie.HABILITADO.getKey());
 		if (hoHomieRepository.findByHoCedula(hoHomie.getHoCedula()) != null) {
 			return null;
 		}

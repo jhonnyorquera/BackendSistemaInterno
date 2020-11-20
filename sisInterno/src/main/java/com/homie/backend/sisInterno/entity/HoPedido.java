@@ -46,6 +46,9 @@ public class HoPedido {
 	@Column(length = 300)
 	private String peDireccion;
 	
+	@Column(length = 300)
+	private String peFactura;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="ho_pedido_padre", referencedColumnName="pe_codigo")
@@ -59,6 +62,18 @@ public class HoPedido {
 
 
 	
+	public String getPeFactura() {
+		return peFactura;
+	}
+
+
+
+	public void setPeFactura(String peFactura) {
+		this.peFactura = peFactura;
+	}
+
+
+
 	@OneToMany(mappedBy="hoPedido", cascade=CascadeType.ALL)
 	private List<HoPedidoHomie> hoHomieList;
 	

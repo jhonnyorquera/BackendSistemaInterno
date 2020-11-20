@@ -113,7 +113,7 @@ public class HoPedidoService {
 				listaHomies.add(hoHomieRepository.findByHoCedula(var));
 			}
 			for (HoHomie varDos : listaHomies) {
-				pedidosPorHomie.add(new HoPedidoHomie(varDos, pedido));
+				pedidosPorHomie.add(new HoPedidoHomie(varDos, pedido, true));
 			}
 		}
 		return pedidosPorHomie;

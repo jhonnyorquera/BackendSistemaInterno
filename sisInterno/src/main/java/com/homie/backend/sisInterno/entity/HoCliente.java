@@ -25,8 +25,7 @@ public class HoCliente {
 	@Column(length = 15)
 	private String clCedulaRuc;
 	
-	@Column(length = 50)
-	private String clTipo;
+	
 	
 	@Column(length = 50)
 	private String clNombre;
@@ -43,7 +42,7 @@ public class HoCliente {
 	@Column(length = 50)
 	private String clCorreo;
 
-	@Column(length = 100)
+	@Column(length = 300)
 	private String obFactura;
 	
 	@JsonIgnore
@@ -79,13 +78,7 @@ public class HoCliente {
 		this.clCedulaRuc = clCedulaRuc;
 	}
 
-	public String getClTipo() {
-		return clTipo;
-	}
 
-	public void setClTipo(String clTipo) {
-		this.clTipo = clTipo;
-	}
 
 	public String getClNombre() {
 		return clNombre;
