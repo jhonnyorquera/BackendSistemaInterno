@@ -66,6 +66,7 @@ public class HoPedidoService {
 		pedido.setPeValor(entidad.getPeValor());
 		// asigna pedido a pagos
 		entidad.getPePagos().stream().forEach((a) -> a.setHoPedido(pedido));
+		entidad.getPePagos().stream().forEach((a) -> a.setPpEstado(true));
 		// agrega lista de servicios por homie
 		pedido.setHoHomieList(crearListaServiciosXHomie(entidad.getCedulasHomies(), pedido));
 		pedido.setPeTipo(TipoPedido.PRINCIPAL.getKey());

@@ -62,7 +62,7 @@ public class HoPedidoServicio {
 	}
 
 	public void setPsNombre(String psNombre) {
-		this.psNombre = psNombre;
+		this.psNombre = psNombre.toUpperCase();
 	}
 
 	public Integer getPsCantidad() {

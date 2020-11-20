@@ -1,9 +1,12 @@
 package com.homie.backend.sisInterno.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.homie.backend.sisInterno.dto.PedidoPagoDto;
+import com.homie.backend.sisInterno.dto.SaldosPagoDto;
 import com.homie.backend.sisInterno.entity.HoPedido;
 import com.homie.backend.sisInterno.entity.HoPedidoPagos;
 import com.homie.backend.sisInterno.repositories.HoPedidoPagosRepository;
@@ -41,6 +44,11 @@ public class HoPedidoPagosService {
 		pedidoPagos.setPpFormaPago(entity.getPpFormaPago());
 		pedidoPagos.setPpValor(entity.getPpValor());
 		return this.hoPedidoPagosRepository.save(pedidoPagos);
+	}
+	
+	public List<SaldosPagoDto>  saldosPago(){
+		
+		return this.hoPedidoRepository.saldosPago();
 	}
 
 }
