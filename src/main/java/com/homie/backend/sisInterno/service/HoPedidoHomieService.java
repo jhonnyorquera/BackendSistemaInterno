@@ -3,9 +3,12 @@ package com.homie.backend.sisInterno.service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.homie.backed.sisInterno.enums.StatusHomie;
+import com.homie.backend.sisInterno.dto.BusquedaDto;
 import com.homie.backend.sisInterno.dto.HoPedidoHomieCrearDto;
 import com.homie.backend.sisInterno.dto.ListaPedidosDto;
 import com.homie.backend.sisInterno.dto.PedidoListDto;
@@ -146,6 +149,12 @@ public class HoPedidoHomieService {
 		}
 
 		return this.hoPedidoHomieRepository.findByHoPedido(pedidos);
+	}
+	
+	
+	public List<PedidoListDto> obtenerPedidosPorHomieFechas(BusquedaDto busqueda){
+		return this.hoPedidoHomieRepository.getPedidosPorHomieFecha(ManejoFechas.quitarHora(busqueda.getFechaInicio()), 
+				ManejoFechas.quitarHora(busqueda.getFechaFin()), busqueda.getCliente());
 	}
 
 }

@@ -19,6 +19,7 @@ public class PedidoListDto {
 	private Long plCantidadHoras;
 	private String plNombreCliente;
 	private String plEstado;
+	private String peCodigo;
 	
 	
 	
@@ -42,6 +43,22 @@ public class PedidoListDto {
 	}
 	
 	
+	
+	
+
+
+
+	public PedidoListDto(String plHoCedula, String plHoNombre, Date plFechaPedido, Long plCantidadHoras,
+			String plNombreCliente, String plEstado, String peCodigo) {
+		super();
+		this.plHoCedula = plHoCedula;
+		this.plHoNombre = plHoNombre;
+		this.plFechaPedido = plFechaPedido;
+		this.plCantidadHoras = plCantidadHoras;
+		this.plNombreCliente = plNombreCliente;
+		this.plEstado = plEstado;
+		this.peCodigo = peCodigo;
+	}
 
 
 
@@ -133,6 +150,18 @@ public class PedidoListDto {
 
 	public void setPlHoTelefono(String plHoTelefono) {
 		this.plHoTelefono = plHoTelefono;
+	}
+
+
+
+	public String getPeCodigo() {
+		return peCodigo;
+	}
+
+
+
+	public void setPeCodigo(String peCodigo) {
+		this.peCodigo = peCodigo;
 	}
 	
 	

@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.homie.backend.sisInterno.dto.BusquedaDto;
 import com.homie.backend.sisInterno.dto.HoPedidoHomieCrearDto;
+import com.homie.backend.sisInterno.dto.PedidoListDto;
 import com.homie.backend.sisInterno.dto.PedidoListDtoRequest;
 import com.homie.backend.sisInterno.dto.PedidoListDtoResponse;
 import com.homie.backend.sisInterno.entity.HoPedidoHomie;
@@ -39,15 +40,21 @@ public class HoPedidoHomieController {
 
 	@PostMapping
 	public ResponseEntity<List<HoPedidoHomie>> actualizarPedido(@RequestBody HoPedidoHomieCrearDto entidad) {
-		List<HoPedidoHomie>pedidoHomie = hoPedidoHomieService.crear(entidad);
+		List<HoPedidoHomie> pedidoHomie = hoPedidoHomieService.crear(entidad);
 		return new ResponseEntity<List<HoPedidoHomie>>(pedidoHomie, HttpStatus.OK);
 	}
-	
+
 	@PutMapping
 	public ResponseEntity<HoPedidoHomie> crearPedido(@RequestBody HoPedidoHomie entidad) {
 		HoPedidoHomie pedidoHomie = hoPedidoHomieService.update(entidad);
 		return new ResponseEntity<HoPedidoHomie>(pedidoHomie, HttpStatus.OK);
 	}
-	
+
+	@PutMapping
+	@RequestMapping("/HoPedidosPorHomieFecha")
+	public ResponseEntity<List<PedidoListDto>> ObtenerPedidoPorHomie(@RequestBody BusquedaDto entidad) {
+		List<PedidoListDto> pedidos = hoPedidoHomieService.obtenerPedidosPorHomieFechas(entidad);
+		return new ResponseEntity<List<PedidoListDto>>(pedidos, HttpStatus.OK);
+	}
 
 }
