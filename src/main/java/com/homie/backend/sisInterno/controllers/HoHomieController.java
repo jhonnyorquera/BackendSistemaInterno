@@ -19,7 +19,6 @@ import com.homie.backend.sisInterno.utils.crearEsquemas;
 
 @RestController
 @RequestMapping("/api/HoHomie")
-
 public class HoHomieController {
 	
 	 @Autowired
@@ -59,8 +58,7 @@ public class HoHomieController {
 	@GetMapping
 	@RequestMapping("/crearContenido")
 	public void  contenido() {
-		Integer response = crearEsquemas.crearEsquema();
-	//	return new ResponseEntity<List<Integer>>(response, HttpStatus.OK);
+		 crearEsquemas.crearEsquema();
 	}
 	
 	

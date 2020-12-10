@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.homie.backend.sisInterno.dto.BusquedaDto;
 import com.homie.backend.sisInterno.dto.BusquedaResponseDto;
 import com.homie.backend.sisInterno.dto.CrearPedidoRequestDto;
-import com.homie.backend.sisInterno.dto.PedidoListDto;
 import com.homie.backend.sisInterno.entity.HoPedido;
-import com.homie.backend.sisInterno.entity.HoPedidoHomie;
 import com.homie.backend.sisInterno.service.HoPedidoService;
 
 @RestController

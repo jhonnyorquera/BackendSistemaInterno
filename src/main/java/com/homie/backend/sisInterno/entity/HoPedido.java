@@ -58,22 +58,6 @@ public class HoPedido {
 	@JsonIgnore
 	private List<HoPedido> pedidosDependientes;
 
-	
-
-
-	
-	public String getPeFactura() {
-		return peFactura;
-	}
-
-
-
-	public void setPeFactura(String peFactura) {
-		this.peFactura = peFactura;
-	}
-
-
-
 	@OneToMany(mappedBy="hoPedido", cascade=CascadeType.ALL)
 	private List<HoPedidoHomie> hoHomieList;
 	
@@ -272,6 +256,17 @@ public class HoPedido {
 
 
 	
+
+	
+	public String getPeFactura() {
+		return peFactura;
+	}
+
+
+
+	public void setPeFactura(String peFactura) {
+		this.peFactura = peFactura;
+	}
 	
 	
 	
