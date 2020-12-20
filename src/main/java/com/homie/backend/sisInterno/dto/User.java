@@ -6,6 +6,18 @@ public class User {
 	private String pwd;
 	private String token;
 
+	
+	
+	public User() {
+		super();
+	}
+
+	public User(String user, String pwd) {
+		super();
+		this.user = user;
+		this.pwd = pwd;
+	}
+
 	public String getUser() {
 		return user;
 	}

@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.homie.backend.sisInterno.dto.TokenDto;
+import com.homie.backend.sisInterno.dto.User;
+import com.homie.backend.sisInterno.entity.HoCliente;
 import com.homie.backend.sisInterno.entity.HoUsuario;
 import com.homie.backend.sisInterno.repositories.HoUsuarioRepository;
 import com.homie.backend.sisInterno.service.HoSecurityService;
@@ -30,30 +32,33 @@ public class UserController {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@Autowired
 	private HoUsuarioRepository hoUserRepository;
-	
+
 	@Autowired
 	private HoSecurityService hoSecurityService;
 
 	@PostMapping("user")
-	public ResponseEntity<TokenDto> login(@RequestParam("user") String username, @RequestParam("password") String pwd) {
+	public ResponseEntity<TokenDto> login(@RequestBody User entidad) {
 		HoUsuario user = new HoUsuario();
-		user = this.hoUserRepository.findByUsCedula(username);
-		if (user != null && passwordEncoder.matches( pwd, user.getUsPassword()) && user.getHoRol() != null) {
-			return ResponseEntity.status(HttpStatus.CREATED).body(getJWTToken(user)) ;
+		TokenDto tk = new TokenDto();
+		user = this.hoUserRepository.findByUsCedula(entidad.getUser());
+		if (user != null && passwordEncoder.matches(entidad.getPwd(), user.getUsPassword()) && user.getHoRol() != null) {
+			tk = getJWTToken(user);
 		} else {
 			return null;
 		}
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(tk);
 	}
 
 	@PostMapping("createuser")
-	private ResponseEntity<HoUsuario> createUser(@RequestBody HoUsuario entity){
+	private ResponseEntity<HoUsuario> createUser(@RequestBody HoUsuario entity) {
 		entity.setUsPassword(passwordEncoder.encode(entity.getUsPassword()));
-		HoUsuario us= hoSecurityService.crearUsuario(entity);
+		HoUsuario us = hoSecurityService.crearUsuario(entity);
 		return ResponseEntity.status(HttpStatus.CREATED).body(us);
-	} 
+	}
 
 	private TokenDto getJWTToken(HoUsuario usuario) {
 		String secretKey = "mySecretKey";
@@ -68,12 +73,12 @@ public class UserController {
 				.signWith(SignatureAlgorithm.HS512, secretKey.getBytes()).compact();
 
 		TokenDto tok = new TokenDto(token);
+		tok.setUsuario(usuario.getUsName());
 		return tok;
 	}
-	
-	
+
 	@Bean
 	public PasswordEncoder encoder() {
-	    return new BCryptPasswordEncoder();
+		return new BCryptPasswordEncoder();
 	}
 }

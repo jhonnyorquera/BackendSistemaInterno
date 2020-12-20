@@ -3,8 +3,19 @@ package com.homie.backend.sisInterno.dto;
 public class TokenDto {
 	
 	public String token;
+	public String usuario;
 	
 	
+	
+	
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
 
 	public TokenDto() {
 		super();
