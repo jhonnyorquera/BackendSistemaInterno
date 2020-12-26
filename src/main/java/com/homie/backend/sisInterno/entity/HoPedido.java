@@ -30,7 +30,11 @@ public class HoPedido {
 		
 	@Column(scale = 2)
 	private Long peCantidadHoras;
-
+	
+	@Column(length = 300)
+	private String peStatusPago;
+	
+	
 	@Column(scale = 2)
 	private String peTipo;
 	
@@ -266,6 +270,18 @@ public class HoPedido {
 
 	public void setPeFactura(String peFactura) {
 		this.peFactura = peFactura;
+	}
+
+
+
+	public String getPeStatusPago() {
+		return peStatusPago;
+	}
+
+
+
+	public void setPeStatusPago(String peStatusPago) {
+		this.peStatusPago = peStatusPago;
 	}
 	
 	

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import com.homie.backend.sisInterno.dto.HomieCaracteristica;
 import com.homie.backend.sisInterno.dto.PedidoListDto;
 import com.homie.backend.sisInterno.dto.PedidoListDtoResponse;
 import com.homie.backend.sisInterno.entity.HoHomie;
@@ -30,6 +31,10 @@ public interface HoPedidoHomieRepository extends CrudRepository<HoPedidoHomie, S
 
 	@Query("SELECT new com.homie.backend.sisInterno.dto.PedidoListDto(h.hoCedula, h.hoNombre, p.peFechaPedido, p.peCantidadHoras, p.hoCliente.clNombre, p.peEstado, p.peCodigo) FROM HoHomie h left OUTER JOIN h.hoPedidoList hp left OUTER join hp.hoPedido p where p.peFechaPedido >= ?1 and p.peFechaPedido <=?2 and h.hoCedula =?3 order by h.hoCedula ")
 	public List<PedidoListDto> getPedidosPorHomieFecha(Date fechaIni, Date fechaFin, String cedula);
+
+	
+	@Query("SELECT new com.homie.backend.sisInterno.dto.HomieCaracteristica(h.hoCedula, h.hoNombre, AVG(hp.hoPeHoCalificacion)) FROM HoHomie h JOIN h.hoPedidoList hp left OUTER join hp.hoPedido p where p.peFechaPedido >= ?1 and p.peFechaPedido <=?2 and p.peEstado not in (?3) GROUP by h.hoCedula ")
+	public List<HomieCaracteristica> getCalificacion(Date fechaIni, Date fechaFin, String status);
 
 	
 	
