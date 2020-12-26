@@ -14,12 +14,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.homie.backend.sisInterno.dto.TokenDto;
 import com.homie.backend.sisInterno.dto.User;
-import com.homie.backend.sisInterno.entity.HoCliente;
 import com.homie.backend.sisInterno.entity.HoUsuario;
 import com.homie.backend.sisInterno.repositories.HoUsuarioRepository;
 import com.homie.backend.sisInterno.service.HoSecurityService;
@@ -61,7 +58,7 @@ public class UserController {
 	}
 
 	private TokenDto getJWTToken(HoUsuario usuario) {
-		String secretKey = "mySecretKey";
+		String secretKey = "L4FirmS3c_reT4:pr0v=taxDi0S";
 		List<GrantedAuthority> grantedAuthorities = AuthorityUtils
 				.commaSeparatedStringToAuthorityList(usuario.getHoRol().getRoNombre());
 

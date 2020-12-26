@@ -49,7 +49,7 @@ public class HoPedidoService {
 		// pedido.setPeFechaPedido(entidad.getPeFechaPedido());
 		pedido.setPeObservacion(entidad.getPeObservacion());
 		pedido.setPeEstado(entidad.getPeEstado());
-		pedido.setPeCodigo("PR" + generarCodigoPedido());
+		pedido.setPeCodigo("PR" + generarCodigoPedido(entidad.getPeFechaPedido().get(0)));
 		pedido.setPeDireccion(entidad.getPeDireccion());
 		pedido.setPeFechaCreacion(new Date());
 		pedido.setHoCliente(hoClienteRepository.findByClId(entidad.getPeCliente()));
@@ -84,7 +84,7 @@ public class HoPedidoService {
 				HoPedido auxPedido = new HoPedido();
 				auxPedido = pedido;
 				auxPedido.setPeFechaPedido(var);
-				auxPedido.setPeCodigo("PL" + this.generarCodigoPedido());
+				auxPedido.setPeCodigo("PL" + this.generarCodigoPedido(var));
 				auxPedido.setHoPedidoPadre(hoPedidoGuardado);
 				auxPedido.setHoPedidoPagoList(null);
 				auxPedido.setPeValor(null);
@@ -120,9 +120,10 @@ public class HoPedidoService {
 
 	}
 
-	private String generarCodigoPedido() {
+	private String generarCodigoPedido(Date fecha) {
 		String codigo = null;
 		Calendar fechaInicio = Calendar.getInstance();
+		fechaInicio.setTime(fecha);
 		fechaInicio.set(Calendar.DAY_OF_MONTH, 1);
 		Calendar fechaFin = Calendar.getInstance();
 
@@ -132,8 +133,10 @@ public class HoPedidoService {
 
 		Long cantidad = hoPedidoRepository.findCantidad(fechaInicio.getTime(), fechaFin.getTime());
 		cantidad = cantidad + 1;
+		int mes=fechaInicio.get(Calendar.MONTH);
+		mes=mes+1;
 
-		codigo = fechaInicio.get(Calendar.YEAR) + "M" + fechaInicio.get(Calendar.MONTH) + "N" + cantidad.toString();
+		codigo = fechaInicio.get(Calendar.YEAR) + "M" + mes + "N" + cantidad.toString();
 		return codigo;
 
 	}
