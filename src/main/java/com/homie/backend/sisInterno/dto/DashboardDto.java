@@ -6,6 +6,7 @@ public class DashboardDto {
 
 	private int cantPedidos;
 	private long cantClientes;
+	private double dineroRecaudado;
 	private List<HomieCaracteristica> calificacion;
 	private List<HomieCaracteristica> dinero;
 	private List<HomieCaracteristica> limpiezas;
@@ -51,6 +52,14 @@ public class DashboardDto {
 
 	public void setLimpiezas(List<HomieCaracteristica> limpiezas) {
 		this.limpiezas = limpiezas;
+	}
+
+	public double getDineroRecaudado() {
+		return dineroRecaudado;
+	}
+
+	public void setDineroRecaudado(double dineroRecaudado) {
+		this.dineroRecaudado = dineroRecaudado;
 	}
 	
 }

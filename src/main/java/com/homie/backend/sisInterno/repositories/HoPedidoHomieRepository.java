@@ -36,6 +36,7 @@ public interface HoPedidoHomieRepository extends CrudRepository<HoPedidoHomie, S
 	@Query("SELECT new com.homie.backend.sisInterno.dto.HomieCaracteristica(h.hoCedula, h.hoNombre, AVG(hp.hoPeHoCalificacion)) FROM HoHomie h JOIN h.hoPedidoList hp left OUTER join hp.hoPedido p where p.peFechaPedido >= ?1 and p.peFechaPedido <=?2 and p.peEstado not in (?3) GROUP by h.hoCedula ")
 	public List<HomieCaracteristica> getCalificacion(Date fechaIni, Date fechaFin, String status);
 
-	
+	@Query("SELECT hp from HoPedidoHomie hp join hp.hoPedido p where p.peFechaPedido >= ?1 and p.peFechaPedido <=?2 and p.peEstado not in (?3) and hp.hoPeStatus = ?4")
+	public List<HoPedidoHomie> findByFechas(Date ini, Date fin, String estado, boolean status);
 	
 }
