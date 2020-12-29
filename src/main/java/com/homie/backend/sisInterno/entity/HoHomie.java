@@ -51,10 +51,10 @@ public class HoHomie {
 	@Column(length = 100)
 	private String hoHijos;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date hoFechaNacimiento;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date hoFechaIngreso;
 
 	@Temporal(TemporalType.TIMESTAMP)
