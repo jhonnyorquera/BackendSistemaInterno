@@ -50,6 +50,8 @@ public class HoHomieController {
 	
 	@PutMapping
 	public ResponseEntity<HoHomie> editar(@RequestBody HoHomie entidad) {
+		
+		System.out.println("fecha:  "+entidad.getHoFechaNacimiento());
 		HoHomie updatedHomie = hoHomieService.editarHomie(entidad);
 		return new ResponseEntity<HoHomie>(updatedHomie, HttpStatus.OK);
 		
