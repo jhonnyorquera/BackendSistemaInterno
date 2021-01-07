@@ -85,7 +85,7 @@ public class HoPedidoService {
 				auxPedido = pedido;
 				auxPedido.setPeFechaPedido(var);
 				auxPedido.setPeCodigo("PL" + this.generarCodigoPedido(var));
-				auxPedido.setHoPedidoPadre(hoPedidoGuardado);
+				auxPedido.setHoPedidoPadre(hoPedidoRepository.findByPeCodigo(codigoPedido));
 				auxPedido.setHoPedidoPagoList(null);
 				auxPedido.setPeValor(null);
 				auxPedido.setPeTipo(TipoPedido.PLAN.getKey());

@@ -2,6 +2,7 @@ package com.homie.backend.sisInterno.entity;
 
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -65,6 +66,7 @@ public class HoHomie {
 
 	@Temporal(TemporalType.DATE)
 	private Date hoFechaSalida;
+
 
 	@OneToMany(mappedBy = "hoHomie", fetch = FetchType.LAZY)
 	@JsonIgnore

@@ -57,11 +57,7 @@ public class HoHomieController {
 		
 	}
 	
-	@GetMapping
-	@RequestMapping("/crearContenido")
-	public void  contenido() {
-		 crearEsquemas.crearEsquema();
-	}
+
 	
 	
 }

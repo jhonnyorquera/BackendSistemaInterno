@@ -16,7 +16,10 @@ import com.homie.backend.sisInterno.entity.HoPedidoHomie;
 import com.homie.backend.sisInterno.repositories.HoClienteRepository;
 import com.homie.backend.sisInterno.repositories.HoPedidoHomieRepository;
 import com.homie.backend.sisInterno.repositories.HoPedidoRepository;
+import com.homie.backend.sisInterno.utils.ManejoDecimal;
 import com.homie.backend.sisInterno.utils.ManejoFechas;
+
+import ch.qos.logback.core.net.SyslogOutputStream;
 
 @Service
 public class HoDashboardService {
@@ -47,11 +50,9 @@ public class HoDashboardService {
 
 		dash.setDinero(dineroXHomie(lista));
 		dash.setLimpiezas(cantLimpiezas(lista));
-		dash.setDineroRecaudado(dash.getDinero().stream().mapToDouble(f -> f.getCantidad()).sum());
-		
-		
+		dash.setDineroRecaudado(
+				ManejoDecimal.truncar(dash.getDinero().stream().mapToDouble(f -> f.getCantidad()).sum()));
 
-		
 		return dash;
 	}
 
@@ -77,14 +78,11 @@ public class HoDashboardService {
 
 		List<HomieCaracteristica> transform = li.stream().collect(Collectors.groupingBy(foo -> foo.getCedula()))
 				.entrySet().stream()
-				.map(e -> e.getValue().stream().reduce((f1, f2) -> new HomieCaracteristica(f1.getCedula(),
-						f1.getNombre(), f1.getCantidad() + f2.getCantidad())))
+				.map(e -> e.getValue().stream()
+						.reduce((f1, f2) -> new HomieCaracteristica(f1.getCedula(), f1.getNombre(),
+								ManejoDecimal.truncar((f1.getCantidad() + f2.getCantidad())))))
 				.map(f -> f.get()).collect(Collectors.toList());
-		
-		 double count =transform.stream().mapToDouble(f -> f.getCantidad()).sum(); 
-		 System.out.println("suma: "+count);
-               
-		
+
 		return transform;
 
 	}
@@ -92,9 +90,9 @@ public class HoDashboardService {
 	private double valorPedido(HoPedido pedido) {
 		double var = 0;
 		if (pedido.getPeTipo().equals(TipoPedido.PRINCIPAL.getKey())) {
-			if (pedido.getPedidosDependientes().size() > 1) {
+			if (pedido.getPedidosDependientes().size() > 0) {
 				int cantidad = pedido.getPedidosDependientes().size();
-				var = pedido.getPeValor() / cantidad;
+				var = pedido.getPeValor() / (cantidad + 1);
 			} else {
 				var = pedido.getPeValor();
 			}
@@ -103,7 +101,10 @@ public class HoDashboardService {
 			HoPedido pedPadre = pedido.getHoPedidoPadre();
 			var = pedPadre.getPeValor() / (pedPadre.getPedidosDependientes().size() + 1);
 		}
-		return var;
+		if (var < 0) {
+			return 0;
+		}
+		return ManejoDecimal.truncar(var);
 	}
 
 }
