@@ -15,7 +15,19 @@ public class ManejoFechas {
 		return calendar.getTime();
 
 	}
+	
 
+
+	
+	public static Date finDia(Date fecha) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(fecha);
+		calendar.set(Calendar.HOUR_OF_DAY, 23);
+		calendar.set(Calendar.MINUTE, 59);
+		return calendar.getTime();
+
+	}
+	
 	public static Date transformarStringADate(String fecha) {
 
 		Date fechaRes = new Date();
@@ -28,7 +40,7 @@ public class ManejoFechas {
 		return fechaRes;
 	}
 
-	public static Date getFechaInicio(Date fecha) {
+	public static Date primerDiaDelMes(Date fecha) {
 		Calendar fechaInicio = Calendar.getInstance();
 		fechaInicio.setTime(fecha);
 		fechaInicio.set(Calendar.DAY_OF_MONTH, 1);
@@ -36,7 +48,7 @@ public class ManejoFechas {
 
 	}
 
-	public static Date getFechaFin(Date fecha) {
+	public static Date ultimoDiaDelMes(Date fecha) {
 
 		Calendar fechaFin = Calendar.getInstance();
 		fechaFin.setTime(fecha);

@@ -122,21 +122,17 @@ public class HoPedidoService {
 
 	private String generarCodigoPedido(Date fecha) {
 		String codigo = null;
-		Calendar fechaInicio = Calendar.getInstance();
-		fechaInicio.setTime(fecha);
-		fechaInicio.set(Calendar.DAY_OF_MONTH, 1);
-		Calendar fechaFin = Calendar.getInstance();
-
-		fechaFin.set(Calendar.DAY_OF_MONTH, 1);
-		fechaFin.add(Calendar.MONTH, 1);
-		fechaFin.add(Calendar.DAY_OF_YEAR, -1);
-
-		Long cantidad = hoPedidoRepository.findCantidad(fechaInicio.getTime(), fechaFin.getTime());
+		Calendar fecha1 = Calendar.getInstance();
+		fecha1.setTime(fecha);
+		
+		Long cantidad = hoPedidoRepository.findCantidad(
+				ManejoFechas.primerDiaDelMes(ManejoFechas.quitarHora(fecha1.getTime())), 
+				ManejoFechas.ultimoDiaDelMes(ManejoFechas.finDia((fecha1.getTime()))));
 		cantidad = cantidad + 1;
-		int mes=fechaInicio.get(Calendar.MONTH);
+		int mes=fecha1.get(Calendar.MONTH);
 		mes=mes+1;
 
-		codigo = fechaInicio.get(Calendar.YEAR) + "M" + mes + "N" + cantidad.toString();
+		codigo = fecha1.get(Calendar.YEAR) + "M" + mes + "N" + cantidad.toString();
 		return codigo;
 
 	}

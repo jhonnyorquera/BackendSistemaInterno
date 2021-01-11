@@ -37,14 +37,18 @@ public class HoDashboardService {
 
 		DashboardDto dash = new DashboardDto();
 
-		dash.setCantPedidos(hoPedidoRepository.cantidadPedidos(ManejoFechas.getFechaInicio(fecha),
-				ManejoFechas.getFechaFin(fecha)));
+		dash.setCantPedidos(hoPedidoRepository.cantidadPedidos(
+				ManejoFechas.primerDiaDelMes(ManejoFechas.quitarHora(fecha)),
+				ManejoFechas.ultimoDiaDelMes(ManejoFechas.finDia(fecha))));
 		dash.setCantClientes(hoClienteRepository.count());
-		dash.setCalificacion(hoPedidoHomieRepository.getCalificacion(ManejoFechas.getFechaInicio(fecha),
-				ManejoFechas.getFechaFin(fecha), "CANCELADO"));
+		
+		dash.setCalificacion(hoPedidoHomieRepository.getCalificacion(
+				ManejoFechas.primerDiaDelMes(ManejoFechas.quitarHora(fecha)),
+				ManejoFechas.ultimoDiaDelMes(ManejoFechas.finDia(fecha)), "CANCELADO"));
 
-		List<HoPedidoHomie> lista = hoPedidoHomieRepository.findByFechas(ManejoFechas.getFechaInicio(fecha),
-				ManejoFechas.getFechaFin(fecha), "CANCELADO", true);
+		List<HoPedidoHomie> lista = hoPedidoHomieRepository.findByFechas(
+				ManejoFechas.primerDiaDelMes(ManejoFechas.quitarHora(fecha)),
+				ManejoFechas.ultimoDiaDelMes(ManejoFechas.finDia(fecha)), "CANCELADO", true);
 
 		dash.setDinero(dineroXHomie(lista));
 		dash.setLimpiezas(cantLimpiezas(lista));

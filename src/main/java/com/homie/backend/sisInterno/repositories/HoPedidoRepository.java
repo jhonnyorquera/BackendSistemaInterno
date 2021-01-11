@@ -14,7 +14,7 @@ import com.homie.backend.sisInterno.entity.HoPedido;
 
 public interface HoPedidoRepository extends CrudRepository<HoPedido, String> {
 
-	@Query("SELECT COUNT(u) FROM HoPedido u WHERE u.peFechaPedido BETWEEN ?1 AND ?2 ")
+	@Query("SELECT COUNT(u) FROM HoPedido u WHERE u.peFechaPedido >= ?1 AND u.peFechaPedido <= ?2 ")
 	public Long findCantidad(Date time, Date time2);
 
 	HoPedido findByPeCodigo(String codigo);
