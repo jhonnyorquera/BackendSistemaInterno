@@ -103,6 +103,16 @@ public class HoDashboardService {
 			HoPedido pedPadre = pedido.getHoPedidoPadre();
 			var = pedPadre.getPeValor() / (pedPadre.getPedidosDependientes().size() + 1);
 		}
+		
+		if(!pedido.getHoHomieList().isEmpty()) {
+			float cantHomies=pedido.getHoHomieList().stream().filter(a -> a.isHoPeStatus()==true).count();
+			if (cantHomies !=0) {
+				var=var/cantHomies;	
+			}
+			
+					
+		}
+		
 		if (var < 0) {
 			return 0;
 		}
