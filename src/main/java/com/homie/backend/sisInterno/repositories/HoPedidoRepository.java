@@ -34,7 +34,14 @@ public interface HoPedidoRepository extends CrudRepository<HoPedido, String> {
 	public List<BusquedaDtoIn> buscarPedidosXCamposInter(@Param("status") String status,
 			@Param("cliente") String cliente, @Param("inicio") Date fechaInicio, @Param("fin") Date fin);
 	
-	@Query("select new com.homie.backend.sisInterno.dto.SaldosPagoDto(p.peCodigo, p.peValor, sum(pa.ppValor), cl.clNombre) from  HoCliente cl join HoPedido p on p.hoCliente = cl.clId left OUTER JOIN HoPedidoPagos pa on p.peCodigo=pa.hoPedido where p.peTipo ='PRINCIPAL' and pa.ppEstado = true GROUP BY cl.clNombre, p.peCodigo ")
+	@Query("select new com.homie.backend.sisInterno.dto.SaldosPagoDto(p.peCodigo, p.peValor, "
+			+ "COALESCE((select sum(pa.ppValor) from pa " + 
+			"									   where p.peCodigo=pa.hoPedido" + 
+			"									   group by p.peCodigo),0), "
+			+ "cl.clNombre) "
+			+ "from  HoCliente cl join HoPedido p on p.hoCliente = cl.clId left JOIN "
+			+ "HoPedidoPagos pa on p.peCodigo=pa.hoPedido where p.peTipo ='PRINCIPAL'  "
+			+ "GROUP BY cl.clNombre, p.peCodigo ")
 	public List<SaldosPagoDto> saldosPago();
 	
 	@Query("select count(p.peCodigo) from HoPedido p where p.peFechaPedido BETWEEN ?1 AND ?2 and p.peEstado  not in ('CANCELADO')  ")
