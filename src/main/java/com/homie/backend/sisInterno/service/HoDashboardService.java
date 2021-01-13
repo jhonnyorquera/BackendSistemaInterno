@@ -107,7 +107,7 @@ public class HoDashboardService {
 			var = pedPadre.getPeValor() / (pedPadre.getPedidosDependientes().size() + 1);
 		}
 		
-		if(pedido.getHoHomieList()) {
+		if(pedido.getHoHomieList()!=null) {
 			System.out.println("tiene una lista de homies");
 			System.out.println("tiene una lista de homiee, tamaño: "+pedido.getHoHomieList().size());
 			float cantHomies=pedido.getHoHomieList().stream().filter(a -> a.isHoPeStatus()==true).count();
