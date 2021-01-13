@@ -99,8 +99,9 @@ public class HoDashboardService {
 				var = pedido.getPeValor();
 			}
 		}
-		if (pedido.getPeTipo().equals(TipoPedido.PLAN.getKey())) {			
-			var = pedPadre.getPeValor() / (pedido.getHoPedidoPadre().getPedidosDependientes().size() + 1);
+		if (pedido.getPeTipo().equals(TipoPedido.PLAN.getKey())) {
+			HoPedido pedPadre = pedido.getHoPedidoPadre();
+			var = pedPadre.getPeValor() / (pedPadre.getPedidosDependientes().size() + 1);		
 		}
 		
 		if(pedido.getHoHomieList()!=null) {
