@@ -93,18 +93,23 @@ public class HoDashboardService {
 		double var = 0;
 		if (pedido.getPeTipo().equals(TipoPedido.PRINCIPAL.getKey())) {
 			if (pedido.getPedidosDependientes().size() > 0) {
+				System.out.println(" Tiene dependientes y es principal");
 				int cantidad = pedido.getPedidosDependientes().size();
+				System.out.println(" Cantidad: "+cantidad);
 				var = pedido.getPeValor() / (cantidad + 1);
 			} else {
 				var = pedido.getPeValor();
 			}
 		}
 		if (pedido.getPeTipo().equals(TipoPedido.PLAN.getKey())) {
+			System.out.println("es parte de un plan");
 			HoPedido pedPadre = pedido.getHoPedidoPadre();
 			var = pedPadre.getPeValor() / (pedPadre.getPedidosDependientes().size() + 1);
 		}
 		
 		if(!pedido.getHoHomieList().isEmpty()) {
+			System.out.println("tiene una lista de homies");
+			System.out.println("tiene una lista de homiee, tamaño: "+pedido.getHoHomieList().size());
 			float cantHomies=pedido.getHoHomieList().stream().filter(a -> a.isHoPeStatus()==true).count();
 			if (cantHomies !=0) {
 				var=var/cantHomies;	
