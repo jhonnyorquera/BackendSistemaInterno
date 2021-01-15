@@ -2,7 +2,7 @@ package com.homie.backend.sisInterno.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.homie.backend.sisInterno.entity.HoHomie;
 import com.homie.backend.sisInterno.service.HoHomieService;
-import com.homie.backend.sisInterno.utils.crearEsquemas;
 
 @RestController
 @RequestMapping("/api/HoHomie")
 public class HoHomieController {
 	
-	 @Autowired
-	 crearEsquemas crearEsquemas;
 	
 	private HoHomieService hoHomieService;
 	

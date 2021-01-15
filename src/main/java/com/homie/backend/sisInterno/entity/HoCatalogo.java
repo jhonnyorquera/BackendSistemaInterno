@@ -22,7 +22,8 @@ public class HoCatalogo {
 	@Column(scale = 2)
 	private Double seValor;
 
-	private int seCantidad;
+	@Column(scale = 2)
+	private Double seCantidad;
 
 	@Column(length = 3)
 	private String seEstado;
@@ -67,11 +68,11 @@ public class HoCatalogo {
 		this.seNombreDetalle = seNombreDetalle.toUpperCase();
 	}
 
-	public int getSeCantidad() {
+	public Double getSeCantidad() {
 		return seCantidad;
 	}
 
-	public void setSeCantidad(int seCantidad) {
+	public void setSeCantidad(Double seCantidad) {
 		this.seCantidad = seCantidad;
 	}
 

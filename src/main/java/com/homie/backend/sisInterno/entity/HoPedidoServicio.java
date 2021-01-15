@@ -23,7 +23,8 @@ public class HoPedidoServicio {
 	private String psNombre;
 	
 	
-	private Integer psCantidad;
+	@Column(scale = 2)
+	private Double psCantidad;
 	
 	@Column(scale = 2)
 	private Double psValor;
@@ -41,7 +42,7 @@ public class HoPedidoServicio {
 		super();
 	}
 
-	public HoPedidoServicio(String psNombre,Integer psCantidad, Double psValor, HoPedido hoPedido) {
+	public HoPedidoServicio(String psNombre,Double psCantidad, Double psValor, HoPedido hoPedido) {
 		super();
 		this.psNombre = psNombre;
 		this.psValor = psValor;
@@ -65,11 +66,11 @@ public class HoPedidoServicio {
 		this.psNombre = psNombre.toUpperCase();
 	}
 
-	public Integer getPsCantidad() {
+	public Double getPsCantidad() {
 		return psCantidad;
 	}
 
-	public void setPsCantidad(Integer psCantidad) {
+	public void setPsCantidad(Double psCantidad) {
 		this.psCantidad = psCantidad;
 	}
 

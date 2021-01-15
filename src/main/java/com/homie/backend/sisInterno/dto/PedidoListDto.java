@@ -16,7 +16,7 @@ public class PedidoListDto {
 	private String plHoModalidad;
 	private String plHoTelefono;
 	private Date plFechaPedido;
-	private Long plCantidadHoras;
+	private Double plCantidadHoras;
 	private String plNombreCliente;
 	private String plEstado;
 	private String peCodigo;
@@ -30,7 +30,7 @@ public class PedidoListDto {
 	
 
 	public PedidoListDto(String plHoCedula, String plHoNombre, String plHoModalidad, String plHoTelefono, Date plFechaPedido,
-			Long plCantidadHoras, String plNombreCliente, String plEstado) {
+			Double plCantidadHoras, String plNombreCliente, String plEstado) {
 		super();
 		this.plHoCedula=plHoCedula;
 		this.plHoNombre = plHoNombre;
@@ -48,7 +48,7 @@ public class PedidoListDto {
 
 
 
-	public PedidoListDto(String plHoCedula, String plHoNombre, Date plFechaPedido, Long plCantidadHoras,
+	public PedidoListDto(String plHoCedula, String plHoNombre, Date plFechaPedido, Double plCantidadHoras,
 			String plNombreCliente, String plEstado, String peCodigo) {
 		super();
 		this.plHoCedula = plHoCedula;
@@ -92,11 +92,11 @@ public class PedidoListDto {
 		this.plFechaPedido = plFechaPedido;
 	}
 
-	public Long getPlCantidadHoras() {
+	public Double getPlCantidadHoras() {
 		return plCantidadHoras;
 	}
 
-	public void setPlCantidadHoras(Long plCantidadHoras) {
+	public void setPlCantidadHoras(Double plCantidadHoras) {
 		this.plCantidadHoras = plCantidadHoras;
 	}
 

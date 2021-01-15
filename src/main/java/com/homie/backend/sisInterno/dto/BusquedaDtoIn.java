@@ -11,7 +11,7 @@ public interface BusquedaDtoIn {
 
 	String getPeEstado();
 
-	Long getPeCantidadHoras();
+	Double getPeCantidadHoras();
 
 	String getPeTipo();
 

@@ -4,16 +4,16 @@ public class PedidoServicioDto {
 	
 	private Integer psCodigo;
 	private String psNombre;
-	private Integer psCantidad;
+	private Double psCantidad;
 	private double psValor;
 	private String hoPedidoCod;
 	
 	
 	
-	public Integer getPsCantidad() {
+	public Double getPsCantidad() {
 		return psCantidad;
 	}
-	public void setPsCantidad(Integer psCantidad) {
+	public void setPsCantidad(Double psCantidad) {
 		this.psCantidad = psCantidad;
 	}
 	public Integer getPsCodigo() {

@@ -9,7 +9,7 @@ import com.homie.backend.sisInterno.entity.HoPedidoPagos;
 public class CrearPedidoRequestDto {
 
 	private List<Date> peFechaPedido;
-	private Long peCantidadHoras;
+	private Double peCantidadHoras;
 	private String peObservacion;
 	private Integer peCliente;
 	private String peEstado ;
@@ -32,10 +32,10 @@ public class CrearPedidoRequestDto {
 	
 	
 	
-	public Long getPeCantidadHoras() {
+	public Double getPeCantidadHoras() {
 		return peCantidadHoras;
 	}
-	public void setPeCantidadHoras(Long peCantidadHoras) {
+	public void setPeCantidadHoras(Double peCantidadHoras) {
 		this.peCantidadHoras = peCantidadHoras;
 	}
 	public String getPeObservacion() {

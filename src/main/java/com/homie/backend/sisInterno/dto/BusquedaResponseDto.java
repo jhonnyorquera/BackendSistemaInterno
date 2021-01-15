@@ -8,7 +8,7 @@ public class BusquedaResponseDto implements BusquedaDtoIn {
 	private String clCliente;
 	private Date peFecha;
 	private String peEstado;
-	private Long peCantidadHoras;
+	private Double peCantidadHoras;
 	private String peTipo;
 	private String pePadre;
 	
@@ -20,7 +20,7 @@ public class BusquedaResponseDto implements BusquedaDtoIn {
 	}
 
 
-	public BusquedaResponseDto(String peCodigo, String clCliente, Date peFecha, String peEstado, Long peCantidadHoras,
+	public BusquedaResponseDto(String peCodigo, String clCliente, Date peFecha, String peEstado, Double peCantidadHoras,
 			String peTipo, String pePadre) {
 		super();
 		this.peCodigo = peCodigo;
@@ -57,10 +57,13 @@ public class BusquedaResponseDto implements BusquedaDtoIn {
 	public void setPeEstado(String peEstado) {
 		this.peEstado = peEstado;
 	}
-	public Long getPeCantidadHoras() {
+
+	public Double getPeCantidadHoras() {
 		return peCantidadHoras;
 	}
-	public void setPeCantidadHoras(Long peCantidadHoras) {
+
+
+	public void setPeCantidadHoras(Double peCantidadHoras) {
 		this.peCantidadHoras = peCantidadHoras;
 	}
 	public String getPeTipo() {

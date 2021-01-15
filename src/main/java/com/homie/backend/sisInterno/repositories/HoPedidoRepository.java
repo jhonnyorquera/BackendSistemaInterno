@@ -25,7 +25,7 @@ public interface HoPedidoRepository extends CrudRepository<HoPedido, String> {
 
 	@Query(value = " select pe.pe_codigo as PeCodigo, " + "cl.cl_nombre as ClCliente, "
 			+ "CAST (pe.pe_fecha_pedido AS date) as PeFecha, " + " pe.pe_estado as PeEstado , "
-			+ "CAST(pe.pe_cantidad_horas AS integer) as PeCantidadHoras, " + "pe.pe_tipo as PeTipo, "
+			+ "pe.pe_cantidad_horas as PeCantidadHoras, " + "pe.pe_tipo as PeTipo, "
 			+ " pe.ho_pedido_padre as PePadre "
 			+ " from ho_pedido pe left outer join ho_cliente cl on pe.ho_cliente = cl.cl_id"
 			+ " where pe.pe_estado like :status and cl.cl_nombre like :cliente"

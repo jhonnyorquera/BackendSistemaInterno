@@ -29,7 +29,7 @@ public class HoPedido {
 	private Date peFechaCreacion;
 		
 	@Column(scale = 2)
-	private Long peCantidadHoras;
+	private Double peCantidadHoras;
 	
 	@Column(length = 300)
 	private String peStatusPago;
@@ -118,7 +118,7 @@ public class HoPedido {
 
 
 
-	public HoPedido(String peCodigo, Date peFechaPedido, Long peCantidadHoras, String peEstado) {
+	public HoPedido(String peCodigo, Date peFechaPedido, Double peCantidadHoras, String peEstado) {
 		super();
 		this.peCodigo = peCodigo;
 		this.peFechaPedido = peFechaPedido;
@@ -144,11 +144,11 @@ public class HoPedido {
 		this.peFechaPedido = peFechaPedido;
 	}
 
-	public Long getPeCantidadHoras() {
+	public Double getPeCantidadHoras() {
 		return peCantidadHoras;
 	}
 
-	public void setPeCantidadHoras(Long peCantidadHoras) {
+	public void setPeCantidadHoras(Double peCantidadHoras) {
 		this.peCantidadHoras = peCantidadHoras;
 	}
 

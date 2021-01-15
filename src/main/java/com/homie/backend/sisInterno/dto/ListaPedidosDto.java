@@ -5,7 +5,7 @@ import java.util.Date;
 public class ListaPedidosDto {
 	
 	private Date  lpFechaPedido;
-	private Long lpCantidadHoras;
+	private Double lpCantidadHoras;
 	private String lpNombreCliente;
 	private String lpEstado;
 	
@@ -20,10 +20,10 @@ public class ListaPedidosDto {
 	public void setLpFechaPedido(Date lpFechaPedido) {
 		this.lpFechaPedido = lpFechaPedido;
 	}
-	public Long getLpCantidadHoras() {
+	public Double getLpCantidadHoras() {
 		return lpCantidadHoras;
 	}
-	public void setLpCantidadHoras(Long lpCantidadHoras) {
+	public void setLpCantidadHoras(Double lpCantidadHoras) {
 		this.lpCantidadHoras = lpCantidadHoras;
 	}
 	public String getLpNombreCliente() {
