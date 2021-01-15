@@ -203,6 +203,7 @@ public class HoPedidoService {
 		aux.setPeCodigo(var.getPeCodigo());
 		aux.setClCliente(var.getClCliente());
 		aux.setPeEstado(var.getPeEstado());
+		
 		aux.setPeCantidadHoras(var.getPeCantidadHoras());
 		aux.setPePadre(var.getPePadre());
 		aux.setPeTipo(var.getPeTipo());
