@@ -77,6 +77,8 @@ public class HoDashboardService {
 		List<HomieCaracteristica> li = new ArrayList<>();
 		list.stream().forEach(a -> li.add(new HomieCaracteristica(a.getHoHomie().getHoCedula(),
 				a.getHoHomie().getHoNombre(), valorPedido(a.getHoPedido()))));
+		
+			list.stream().forEach(a->System.out.println("Pedido: "+a.getHoPedido()+"homie: "+a.getHoHomie().getHoNombre()));
 
 		List<HomieCaracteristica> transform = li.stream().collect(Collectors.groupingBy(foo -> foo.getCedula()))
 				.entrySet().stream()
