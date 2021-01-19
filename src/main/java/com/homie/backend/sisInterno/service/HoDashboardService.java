@@ -75,7 +75,8 @@ public class HoDashboardService {
 
 	private List<HomieCaracteristica> dineroXHomie(List<HoPedidoHomie> list) {
 		
-		System.out.println("valor desde lista"+list.stream().mapToDouble(a->a.getHoPedido().getPeValor()).sum());
+			System.out.println("valor desde lista"+list.stream().mapToDouble(a->a.getHoPedido().getPeValor()!=null ? a.getHoPedido().getPeValor():0 ).sum());
+
 		
 		List<HomieCaracteristica> li = new ArrayList<>();
 		list.stream().forEach(a -> li.add(new HomieCaracteristica(a.getHoHomie().getHoCedula(),
