@@ -78,7 +78,7 @@ public class HoDashboardService {
 		list.stream().forEach(a -> li.add(new HomieCaracteristica(a.getHoHomie().getHoCedula(),
 				a.getHoHomie().getHoNombre(), valorPedido(a.getHoPedido()))));
 		
-			
+		System.out.println("suma valores: "+li.stream().mapToDouble(a->a.getCantidad()).sum());
 		List<HomieCaracteristica> transform = li.stream().collect(Collectors.groupingBy(foo -> foo.getCedula()))
 				.entrySet().stream()
 				.map(e -> e.getValue().stream()
