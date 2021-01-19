@@ -78,8 +78,7 @@ public class HoDashboardService {
 		list.stream().forEach(a -> li.add(new HomieCaracteristica(a.getHoHomie().getHoCedula(),
 				a.getHoHomie().getHoNombre(), valorPedido(a.getHoPedido()))));
 		
-			list.stream().forEach(a->System.out.println("Pedido: "+a.getHoPedido()+"homie: "+a.getHoHomie().getHoNombre()));
-
+			
 		List<HomieCaracteristica> transform = li.stream().collect(Collectors.groupingBy(foo -> foo.getCedula()))
 				.entrySet().stream()
 				.map(e -> e.getValue().stream()
@@ -92,6 +91,7 @@ public class HoDashboardService {
 	}
 
 	private double valorPedido(HoPedido pedido) {
+		System.out.println("codigo: " + pedido.getPeCodigo());
 		double var = 0;
 		if (pedido.getPeTipo().equals(TipoPedido.PRINCIPAL.getKey())) {
 			if (pedido.getPedidosDependientes().size() > 0) {
@@ -116,6 +116,7 @@ public class HoDashboardService {
 		if (var < 0) {
 			return 0;
 		}
+		System.out.println("valor: " + ManejoDecimal.truncar(var));
 		return ManejoDecimal.truncar(var);
 	}
 
