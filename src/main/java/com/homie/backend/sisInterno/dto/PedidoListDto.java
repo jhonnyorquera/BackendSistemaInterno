@@ -20,7 +20,7 @@ public class PedidoListDto {
 	private String plNombreCliente;
 	private String plEstado;
 	private String peCodigo;
-	
+	private Double peCalificacion;
 	
 	
 	public PedidoListDto() {
@@ -58,6 +58,21 @@ public class PedidoListDto {
 		this.plNombreCliente = plNombreCliente;
 		this.plEstado = plEstado;
 		this.peCodigo = peCodigo;
+		
+	}
+	
+	
+	public PedidoListDto(String plHoCedula, String plHoNombre, Date plFechaPedido, Double plCantidadHoras,
+			String plNombreCliente, String plEstado, String peCodigo, Double peCalificacion) {
+		super();
+		this.plHoCedula = plHoCedula;
+		this.plHoNombre = plHoNombre;
+		this.plFechaPedido = plFechaPedido;
+		this.plCantidadHoras = plCantidadHoras;
+		this.plNombreCliente = plNombreCliente;
+		this.plEstado = plEstado;
+		this.peCodigo = peCodigo;
+		this.peCalificacion =peCalificacion;
 	}
 
 
@@ -162,6 +177,18 @@ public class PedidoListDto {
 
 	public void setPeCodigo(String peCodigo) {
 		this.peCodigo = peCodigo;
+	}
+
+
+
+	public Double getPeCalificacion() {
+		return peCalificacion;
+	}
+
+
+
+	public void setPeCalificacion(Double peCalificacion) {
+		this.peCalificacion = peCalificacion;
 	}
 	
 	
