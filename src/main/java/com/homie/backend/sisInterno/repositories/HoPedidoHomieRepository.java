@@ -29,7 +29,8 @@ public interface HoPedidoHomieRepository extends CrudRepository<HoPedidoHomie, S
 	public HoPedidoHomie getByPedidoHomie(HoPedido varUno, HoHomie varDos);
 
 
-	@Query("SELECT new com.homie.backend.sisInterno.dto.PedidoListDto(h.hoCedula, h.hoNombre, p.peFechaPedido, p.peCantidadHoras, p.hoCliente.clNombre, p.peEstado, p.peCodigo) FROM HoHomie h left OUTER JOIN h.hoPedidoList hp left OUTER join hp.hoPedido p where p.peFechaPedido >= ?1 and p.peFechaPedido <=?2 and h.hoCedula =?3 order by h.hoCedula ")
+	@Query("SELECT new com.homie.backend.sisInterno.dto.PedidoListDto(h.hoCedula, h.hoNombre, p.peFechaPedido, p.peCantidadHoras, p.hoCliente.clNombre, p.peEstado, p.peCodigo) "
+			+ "FROM HoHomie h left OUTER JOIN h.hoPedidoList hp left OUTER join hp.hoPedido p where p.peFechaPedido >= ?1 and p.peFechaPedido <=?2 and h.hoCedula =?3 and hp.hoPeStatus =true order by h.hoCedula ")
 	public List<PedidoListDto> getPedidosPorHomieFecha(Date fechaIni, Date fechaFin, String cedula);
 
 	
