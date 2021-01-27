@@ -75,15 +75,12 @@ public class HoDashboardService {
 
 	private List<HomieCaracteristica> dineroXHomie(List<HoPedidoHomie> list) {
 		
-			System.out.println("valor desde lista"+list.stream().mapToDouble(a->a.getHoPedido().getPeValor()!=null ? a.getHoPedido().getPeValor():0 ).sum());
-
-		
+	
 		List<HomieCaracteristica> li = new ArrayList<>();
 		list.stream().forEach(a -> li.add(new HomieCaracteristica(a.getHoHomie().getHoCedula(),
 				a.getHoHomie().getHoNombre(), valorPedido(a.getHoPedido()))));
 		
-		System.out.println("suma valores: "+li.stream().mapToDouble(a->a.getCantidad()).sum());
-		List<HomieCaracteristica> transform = li.stream().collect(Collectors.groupingBy(foo -> foo.getCedula()))
+			List<HomieCaracteristica> transform = li.stream().collect(Collectors.groupingBy(foo -> foo.getCedula()))
 				.entrySet().stream()
 				.map(e -> e.getValue().stream()
 						.reduce((f1, f2) -> new HomieCaracteristica(f1.getCedula(), f1.getNombre(),
@@ -95,8 +92,7 @@ public class HoDashboardService {
 	}
 
 	private double valorPedido(HoPedido pedido) {
-		System.out.println("codigo: " + pedido.getPeCodigo());
-		double var = 0;
+			double var = 0;
 		if (pedido.getPeTipo().equals(TipoPedido.PRINCIPAL.getKey())) {
 			if (pedido.getPedidosDependientes().size() > 0) {
 				int cantidad = pedido.getPedidosDependientes().size();			
@@ -120,7 +116,6 @@ public class HoDashboardService {
 		if (var < 0) {
 			return 0;
 		}
-		System.out.println("valor: " + ManejoDecimal.truncar(var));
 		return ManejoDecimal.truncar(var);
 	}
 

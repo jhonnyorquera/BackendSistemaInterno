@@ -36,9 +36,9 @@ public interface HoPedidoRepository extends CrudRepository<HoPedido, String> {
 	
 	@Query("select new com.homie.backend.sisInterno.dto.SaldosPagoDto(p.peCodigo, p.peValor, "
 			+ "COALESCE((select sum(pa.ppValor) from pa " + 
-			"									   where p.peCodigo=pa.hoPedido" + 
+			"									   where p.peCodigo=pa.hoPedido and pa.ppEstado = true" + 
 			"									   group by p.peCodigo),0), "
-			+ "cl.clNombre) "
+			+ "cl.clNombre, p.peStatusPago) "
 			+ "from  HoCliente cl join HoPedido p on p.hoCliente = cl.clId left JOIN "
 			+ "HoPedidoPagos pa on p.peCodigo=pa.hoPedido where p.peTipo ='PRINCIPAL'  "
 			+ "GROUP BY cl.clNombre, p.peCodigo ")

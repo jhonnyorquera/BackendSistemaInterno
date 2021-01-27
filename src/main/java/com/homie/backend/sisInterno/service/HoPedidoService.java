@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.homie.backed.sisInterno.enums.PedidoStatusPago;
 import com.homie.backed.sisInterno.enums.TipoPedido;
 import com.homie.backend.sisInterno.dto.BusquedaDto;
 import com.homie.backend.sisInterno.dto.BusquedaDtoIn;
@@ -16,6 +17,7 @@ import com.homie.backend.sisInterno.entity.HoCatalogo;
 import com.homie.backend.sisInterno.entity.HoHomie;
 import com.homie.backend.sisInterno.entity.HoPedido;
 import com.homie.backend.sisInterno.entity.HoPedidoHomie;
+import com.homie.backend.sisInterno.entity.HoPedidoPagos;
 import com.homie.backend.sisInterno.entity.HoPedidoServicio;
 import com.homie.backend.sisInterno.repositories.HoClienteRepository;
 import com.homie.backend.sisInterno.repositories.HoHomieRepository;
@@ -67,6 +69,12 @@ public class HoPedidoService {
 		// asigna pedido a pagos
 		entidad.getPePagos().stream().forEach((a) -> a.setHoPedido(pedido));
 		entidad.getPePagos().stream().forEach((a) -> a.setPpEstado(true));
+		
+		//Comprueba status del pago
+		pedido.setPeStatusPago(PedidoStatusPago.PORCOBRAR.getKey());
+		if(entidad.getPePagos().stream().mapToDouble((a)->a.getPpValor()).sum() >=entidad.getPeValor()) {
+			pedido.setPeStatusPago(PedidoStatusPago.PAGADO.getKey());
+		}
 		// agrega lista de servicios por homie
 		pedido.setHoHomieList(crearListaServiciosXHomie(entidad.getCedulasHomies(), pedido));
 		pedido.setPeTipo(TipoPedido.PRINCIPAL.getKey());
@@ -89,6 +97,7 @@ public class HoPedidoService {
 				auxPedido.setHoPedidoPagoList(null);
 				auxPedido.setPeValor(null);
 				auxPedido.setPeTipo(TipoPedido.PLAN.getKey());
+				auxPedido.setPeStatusPago(null);
 				hoPedidoGuardado = hoPedidoRepository.save(auxPedido);
 				listaPedidods.add(auxPedido);
 			}
@@ -119,6 +128,8 @@ public class HoPedidoService {
 		return pedidosPorHomie;
 
 	}
+	
+
 
 	private String generarCodigoPedido(Date fecha) {
 		String codigo = null;

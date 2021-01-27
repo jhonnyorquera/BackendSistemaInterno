@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.homie.backed.sisInterno.enums.PedidoStatusPago;
 import com.homie.backend.sisInterno.dto.PedidoPagoDto;
 import com.homie.backend.sisInterno.dto.SaldosPagoDto;
 import com.homie.backend.sisInterno.entity.HoPedido;
@@ -18,6 +19,8 @@ public class HoPedidoPagosService {
 
 	@Autowired
 	private HoPedidoRepository hoPedidoRepository;
+	
+
 
 	public HoPedidoPagosService(HoPedidoPagosRepository hoPedidoPagosRepository) {
 		this.hoPedidoPagosRepository = hoPedidoPagosRepository;
@@ -29,6 +32,7 @@ public class HoPedidoPagosService {
 		pedido.setPpEstado(entity.isPpEstado());
 		pedido.setPpFormaPago(entity.getPpFormaPago());
 		pedido.setPpValor(entity.getPpValor());
+		
 		return this.hoPedidoPagosRepository.save(pedido);
 	}
 
@@ -50,5 +54,17 @@ public class HoPedidoPagosService {
 		
 		return this.hoPedidoRepository.saldosPago();
 	}
-
+	
+	public void actualizarStatusPago(String codigo){
+		HoPedido pedido =hoPedidoRepository.findByPeCodigo(codigo);
+		if(pedido.getHoPedidoPagoList().stream().filter((a)-> a.isPpEstado() == true)
+				.mapToDouble((a)->a.getPpValor()).sum()>=pedido.getPeValor()) {
+			pedido.setPeStatusPago(PedidoStatusPago.PAGADO.getKey());
+		}else {
+			pedido.setPeStatusPago(PedidoStatusPago.PORCOBRAR.getKey());
+		}
+		hoPedidoRepository.save(pedido);
+		
+		
+	}
 }

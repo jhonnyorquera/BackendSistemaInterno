@@ -31,6 +31,7 @@ public class HoPedidoPagosController {
 	@PutMapping
 	public ResponseEntity<HoPedidoPagos> editar(@RequestBody HoPedidoPagos entidad) {
 		HoPedidoPagos item = hoPedidoPagosService.edit(entidad);
+		hoPedidoPagosService.actualizarStatusPago(item.getHoPedido().getPeCodigo());
 		return new ResponseEntity<HoPedidoPagos>(item, HttpStatus.OK);
 
 	}
@@ -38,6 +39,7 @@ public class HoPedidoPagosController {
 	@PostMapping
 	public ResponseEntity<HoPedidoPagos> guardar(@RequestBody PedidoPagoDto entidad) {
 		HoPedidoPagos newServicio = this.hoPedidoPagosService.guardar(entidad);
+		hoPedidoPagosService.actualizarStatusPago(entidad.getHoPedidoCodigo());
 		return ResponseEntity.status(HttpStatus.CREATED).body(newServicio);
 	}
 	
