@@ -30,7 +30,6 @@ public class CustomRevisionListener implements RevisionListener {
 	private String getThreadAccountUserName() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
-	        String username;
         if (!authentication.isAuthenticated()) {
             return null;
         }

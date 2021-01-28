@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,6 @@ import com.homie.backend.sisInterno.entity.HoCatalogo;
 import com.homie.backend.sisInterno.entity.HoHomie;
 import com.homie.backend.sisInterno.entity.HoPedido;
 import com.homie.backend.sisInterno.entity.HoPedidoHomie;
-import com.homie.backend.sisInterno.entity.HoPedidoPagos;
 import com.homie.backend.sisInterno.entity.HoPedidoServicio;
 import com.homie.backend.sisInterno.repositories.HoClienteRepository;
 import com.homie.backend.sisInterno.repositories.HoHomieRepository;

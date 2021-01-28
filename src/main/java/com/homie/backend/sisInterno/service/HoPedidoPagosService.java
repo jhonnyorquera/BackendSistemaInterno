@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.homie.backed.sisInterno.enums.PedidoStatusPago;
+import com.homie.backend.sisInterno.dto.BusquedaDto;
 import com.homie.backend.sisInterno.dto.PedidoPagoDto;
 import com.homie.backend.sisInterno.dto.SaldosPagoDto;
 import com.homie.backend.sisInterno.entity.HoPedido;
@@ -50,9 +51,11 @@ public class HoPedidoPagosService {
 		return this.hoPedidoPagosRepository.save(pedidoPagos);
 	}
 	
-	public List<SaldosPagoDto>  saldosPago(){
-		
-		return this.hoPedidoRepository.saldosPago();
+	public List<SaldosPagoDto>  saldosPago(BusquedaDto busqueda ){
+		if(busqueda.getEstado().equals("TODOS")){
+			busqueda.setEstado("");
+		}
+		return this.hoPedidoRepository.saldosPago(busqueda.getFechaInicio(), busqueda.getFechaFin(), busqueda.getEstado());
 	}
 	
 	public void actualizarStatusPago(String codigo){
