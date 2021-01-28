@@ -36,7 +36,7 @@ public interface HoPedidoRepository extends CrudRepository<HoPedido, String> {
 			+ "									   where p.peCodigo=pa.hoPedido and pa.ppEstado = true"
 			+ "									   group by p.peCodigo),0), " + "cl.clNombre, p.peStatusPago) "
 			+ "from  HoCliente cl join HoPedido p on p.hoCliente = cl.clId left JOIN "
-			+ "HoPedidoPagos pa on p.peCodigo=pa.hoPedido where p.peTipo ='PRINCIPAL' and p.peFechaPedido >=?1 and p.peFechaPedido<=?2  "
+			+ "HoPedidoPagos pa on p.peCodigo=pa.hoPedido where p.peTipo ='PRINCIPAL' and p.peFechaPedido >=?1 and p.peFechaPedido<=?2 and p.peStatusPago like %?3% "
 			+ "GROUP BY cl.clNombre, p.peCodigo ")
 	public List<SaldosPagoDto> saldosPago(Date fechaInicial, Date fechaFinal, String statusPago);
 
