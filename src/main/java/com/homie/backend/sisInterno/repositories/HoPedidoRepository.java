@@ -31,12 +31,13 @@ public interface HoPedidoRepository extends CrudRepository<HoPedido, String> {
 	public List<BusquedaDtoIn> buscarPedidosXCamposInter(@Param("status") String status,
 			@Param("cliente") String cliente, @Param("inicio") Date fechaInicio, @Param("fin") Date fin);
 
-	@Query("select new com.homie.backend.sisInterno.dto.SaldosPagoDto(p.peCodigo, p.peValor, "
-			+ "COALESCE((select sum(pa.ppValor) from pa "
-			+ "									   where p.peCodigo=pa.hoPedido and pa.ppEstado = true"
-			+ "									   group by p.peCodigo),0), " + "cl.clNombre, p.peStatusPago) "
+	@Query("select new com.homie.backend.sisInterno.dto.SaldosPagoDto"
+			+ "(p.peCodigo, p.peValor, "
+			+ "COALESCE((select sum(pa.ppValor) from pa where p.peCodigo=pa.hoPedido and pa.ppEstado = true"
+			+ "group by p.peCodigo),0), " + "cl.clNombre, p.peStatusPago) "
 			+ "from  HoCliente cl join HoPedido p on p.hoCliente = cl.clId left JOIN "
-			+ "HoPedidoPagos pa on p.peCodigo=pa.hoPedido where p.peTipo ='PRINCIPAL' and p.peFechaPedido >=?1 and p.peFechaPedido<=?2 and p.peStatusPago like %?3% "
+			+ "HoPedidoPagos pa on p.peCodigo=pa.hoPedido where p.peTipo ='PRINCIPAL' "
+			+ "and p.peFechaPedido >=?1 and p.peFechaPedido<=?2 "
 			+ "GROUP BY cl.clNombre, p.peCodigo ")
 	public List<SaldosPagoDto> saldosPago(Date fechaInicial, Date fechaFinal, String statusPago);
 
