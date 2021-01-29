@@ -9,6 +9,7 @@ import com.homie.backed.sisInterno.enums.PedidoStatusPago;
 import com.homie.backend.sisInterno.dto.BusquedaDto;
 import com.homie.backend.sisInterno.dto.PedidoPagoDto;
 import com.homie.backend.sisInterno.dto.SaldosPagoDto;
+import com.homie.backend.sisInterno.dto.SaldosPagoDtoIn;
 import com.homie.backend.sisInterno.entity.HoPedido;
 import com.homie.backend.sisInterno.entity.HoPedidoPagos;
 import com.homie.backend.sisInterno.repositories.HoPedidoPagosRepository;
@@ -51,7 +52,7 @@ public class HoPedidoPagosService {
 		return this.hoPedidoPagosRepository.save(pedidoPagos);
 	}
 	
-	public List<SaldosPagoDto>  saldosPago(BusquedaDto busqueda ){
+	public List<SaldosPagoDtoIn>  saldosPago(BusquedaDto busqueda ){
 		if(busqueda.getEstado().equals("TODOS")){
 			busqueda.setEstado("");
 		}

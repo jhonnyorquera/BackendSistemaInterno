@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.homie.backend.sisInterno.dto.BusquedaDto;
 import com.homie.backend.sisInterno.dto.PedidoPagoDto;
 import com.homie.backend.sisInterno.dto.SaldosPagoDto;
+import com.homie.backend.sisInterno.dto.SaldosPagoDtoIn;
 import com.homie.backend.sisInterno.entity.HoPedidoPagos;
 import com.homie.backend.sisInterno.service.HoPedidoPagosService;
 
@@ -49,9 +50,9 @@ public class HoPedidoPagosController {
 	
 	@PutMapping
 	@RequestMapping("/pagos")
-	public ResponseEntity<List<SaldosPagoDto>> pagos(@RequestBody BusquedaDto busqueda) {
-		List<SaldosPagoDto> saldos = hoPedidoPagosService.saldosPago(busqueda);
-		return new ResponseEntity<List<SaldosPagoDto>>(saldos, HttpStatus.OK);
+	public ResponseEntity<List<SaldosPagoDtoIn>> pagos(@RequestBody BusquedaDto busqueda) {
+		List<SaldosPagoDtoIn> saldos = hoPedidoPagosService.saldosPago(busqueda);
+		return new ResponseEntity<List<SaldosPagoDtoIn>>(saldos, HttpStatus.OK);
 
 	}
 
