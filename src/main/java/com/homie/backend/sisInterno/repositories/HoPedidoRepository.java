@@ -37,7 +37,7 @@ public interface HoPedidoRepository extends CrudRepository<HoPedido, String> {
 			+ "			from  ho_cliente cl join ho_pedido ped on ped.ho_cliente = cl.cl_id left JOIN "
 			+ "			ho_pedido_pagos pa on ped.pe_codigo=pa.ho_pedido  where ped.pe_tipo ='PRINCIPAL' "
 			+ "			and ped.pe_fecha_pedido >=:fechaInicial "
-			+ "			and ped.pe_fecha_pedido<=:fechaFinal and ped.pe_status_pago like '%:stado%'"
+			+ "			and ped.pe_fecha_pedido<=:fechaFinal and ped.pe_status_pago like %:stado%"
 			+ "			GROUP BY cl.cl_nombre, ped.pe_codigo ", nativeQuery = true)
 	public List<SaldosPagoDto> saldosPago(@Param("fechaInicial") Date fechaInicial,
 			@Param("fechaFinal") Date fechaFinal, @Param("stado") String stado);
