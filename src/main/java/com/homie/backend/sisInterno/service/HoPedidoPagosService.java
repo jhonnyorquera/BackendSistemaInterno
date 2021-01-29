@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service;
 import com.homie.backed.sisInterno.enums.PedidoStatusPago;
 import com.homie.backend.sisInterno.dto.BusquedaDto;
 import com.homie.backend.sisInterno.dto.PedidoPagoDto;
-import com.homie.backend.sisInterno.dto.SaldosPagoDto;
 import com.homie.backend.sisInterno.dto.SaldosPagoDtoIn;
 import com.homie.backend.sisInterno.entity.HoPedido;
 import com.homie.backend.sisInterno.entity.HoPedidoPagos;
 import com.homie.backend.sisInterno.repositories.HoPedidoPagosRepository;
 import com.homie.backend.sisInterno.repositories.HoPedidoRepository;
+import com.homie.backend.sisInterno.utils.ManejoFechas;
 
 @Service
 public class HoPedidoPagosService {
@@ -56,7 +56,7 @@ public class HoPedidoPagosService {
 		if(busqueda.getEstado().equals("TODOS")){
 			busqueda.setEstado("");
 		}
-		return this.hoPedidoRepository.saldosPago(busqueda.getFechaInicio(), busqueda.getFechaFin(), busqueda.getEstado());
+		return this.hoPedidoRepository.saldosPago(ManejoFechas.quitarHora(busqueda.getFechaInicio()), ManejoFechas.finDia(busqueda.getFechaFin()), busqueda.getEstado());
 	}
 	
 	public void actualizarStatusPago(String codigo){
