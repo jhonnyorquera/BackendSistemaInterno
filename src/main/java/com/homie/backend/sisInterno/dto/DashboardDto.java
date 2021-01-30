@@ -10,6 +10,7 @@ public class DashboardDto {
 	private List<HomieCaracteristica> calificacion;
 	private List<HomieCaracteristica> dinero;
 	private List<HomieCaracteristica> limpiezas;
+	private List<ResumenHomieDto> resumenHomie;
 	
 		
 	
@@ -60,6 +61,14 @@ public class DashboardDto {
 
 	public void setDineroRecaudado(double dineroRecaudado) {
 		this.dineroRecaudado = dineroRecaudado;
+	}
+
+	public List<ResumenHomieDto> getResumenHomie() {
+		return resumenHomie;
+	}
+
+	public void setResumenHomie(List<ResumenHomieDto> resumenHomie) {
+		this.resumenHomie = resumenHomie;
 	}
 	
 }
