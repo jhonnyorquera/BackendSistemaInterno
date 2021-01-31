@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.homie.backend.sisInterno.dto.BusquedaDto;
 import com.homie.backend.sisInterno.dto.DashboardDto;
 import com.homie.backend.sisInterno.service.HoDashboardService;
 
@@ -18,8 +19,8 @@ public class HoGeneralController {
 	private HoDashboardService hoDasboardService;
 
 	@GetMapping
-	public ResponseEntity<DashboardDto> getDash() {
-		DashboardDto dash = hoDasboardService.getInfoDashboard();
+	public ResponseEntity<DashboardDto> getDash(BusquedaDto busqueda) {
+		DashboardDto dash = hoDasboardService.getInfoDashboard(busqueda.getFechaInicio(), busqueda.getFechaFin());
 		return new ResponseEntity<DashboardDto>(dash, HttpStatus.OK);
 	}
 
