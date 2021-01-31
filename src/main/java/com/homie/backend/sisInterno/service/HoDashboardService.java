@@ -37,8 +37,7 @@ public class HoDashboardService {
 	private HoPedidoHomieRepository hoPedidoHomieRepository;
 
 	public DashboardDto getInfoDashboard(Date fechaInicial, Date fechaFinal) {
-
-		//Date fecha = new Date();
+		
 
 		DashboardDto dash = new DashboardDto();
 
